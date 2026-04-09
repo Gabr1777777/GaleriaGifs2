@@ -148,6 +148,7 @@
 
 <div class="bg-glow"></div>
 
+<div class="bg-glow"></div>
 <div id="zoom-overlay" onclick="closeZoom()"><img id="zoomed-img" src=""></div>
 <div id="splash-screen"><button class="btn-enter" onclick="enterGallery()">Entrar</button></div>
 
@@ -170,6 +171,7 @@
                 <button class="p-btn" onclick="prevSong()">❮</button>
                 <button class="p-btn" id="play-btn" onclick="playPause()">Pause</button>
                 <button class="p-btn" onclick="nextSong()">❯</button>
+                <button class="p-btn" id="vol-btn" onclick="toggleVolume()">Vol: 100%</button>
             </div>
         </div>
     </div>
@@ -287,6 +289,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     const playlist = [
