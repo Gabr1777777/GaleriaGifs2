@@ -26,7 +26,6 @@
             z-index: -1;
         }
 
-        /* TELA DE ENTRADA */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
@@ -44,16 +43,12 @@
 
         @keyframes gradientMove { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
 
-        /* CONTAINER DE TRANSIÇÃO */
         .wrapper {
             display: flex; width: 200vw; height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
-        .page {
-            width: 100vw; height: 100vh;
-            display: flex; justify-content: center; align-items: center;
-        }
+        .page { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }
 
         .container {
             width: 85%; max-width: 420px; height: 85vh;
@@ -69,7 +64,6 @@
         .content-scroll::-webkit-scrollbar { width: 4px; }
         .content-scroll::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
 
-        /* GRID PRINCIPAL - BOTÕES MENORES */
         .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .item {
             background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
@@ -79,7 +73,6 @@
         .item strong { font-size: 0.75rem; display: block; }
         .item span { font-size: 0.6rem; color: #666; }
 
-        /* MARQUEE */
         .marquee-box {
             background: rgba(0, 72, 255, 0.12);
             border-top: 1px solid var(--neon-blue);
@@ -97,37 +90,23 @@
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* EXIBIÇÃO DAS GIFS 80x80 */
-        .gif-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
+        .gif-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
 
         .gif-card {
+            width: 80px; text-align: center; transition: 0.3s;
+        }
+
+        .gif-img-box {
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--glass-border);
             border-radius: 8px;
-            padding: 4px;
-            width: 80px; /* Largura fixa */
-            height: 80px; /* Altura fixa */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            transition: 0.3s;
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; margin-bottom: 4px;
         }
 
-        .gif-card:hover { border-color: var(--neon-blue); background: rgba(0, 72, 255, 0.08); }
-
-        .gif-card img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 4px;
-        }
+        .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; display: block; }
 
         .btn-back {
             background: none; border: 1px solid #444; color: #fff;
@@ -136,7 +115,6 @@
         }
         .btn-back:hover { background: #fff; color: #000; }
 
-        /* PLAYER */
         #music-player { 
             margin-top: 10px; padding: 10px; 
             background: rgba(0, 72, 255, 0.08); border: 1px solid var(--glass-border);
@@ -184,40 +162,47 @@
     <div class="page">
         <div class="container">
             <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">GALERIA DE GIFS</h2>
-
             <div class="content-scroll">
                 <div class="marquee-box"><div class="marquee-text">Modelos AfterEffects - 400 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>After - 1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>After - 2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>After - 3</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After - 4</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After - 5</span></div>
                 </div>
 
                 <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff - 1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Bluff - 2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff - 3</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff - 4</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff - 5</span></div>
                 </div>
 
                 <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Canva - 1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Canva - 2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Canva - 3</span></div>
                 </div>
 
                 <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Space - 1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Space - 2</span></div>
+                </div>
+
+                <div class="marquee-box"><div class="marquee-text">Modelo Santa - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Santa - 1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Santa - 2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Santa - 3</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Santa - 4</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Santa - 5</span></div>
                 </div>
             </div>
-
             <button class="btn-back" onclick="closeCategory()">VOLTAR</button>
         </div>
     </div>
@@ -232,7 +217,6 @@
 
     let currentTrack = 0;
     const audio = new Audio();
-    let playerOpen = false;
 
     function loadTrack(index) {
         currentTrack = index;
@@ -272,8 +256,7 @@
     function closeCategory() { document.getElementById('main-wrapper').style.transform = 'translateX(0)'; }
     function togglePlayer() {
         const p = document.getElementById('music-player');
-        playerOpen = !playerOpen;
-        p.style.display = playerOpen ? 'block' : 'none';
+        p.style.display = p.style.display === 'block' ? 'none' : 'block';
     }
 
     document.addEventListener('contextmenu', e => e.preventDefault());
