@@ -94,6 +94,25 @@
             padding: 20px; text-align: center; display: flex; flex-direction: column;
         }
 
+        /* CABEÇALHO COM FOTO E TITULO */
+        .header-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .user-photo {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 72, 255, 0.3);
+            background: var(--silver-grad);
+            padding: 2px;
+        }
+
         .main-title {
             background: var(--silver-grad);
             background-size: 200% auto;
@@ -116,7 +135,7 @@
             background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
             border-radius: 4px; padding: 10px; transition: 0.3s; cursor: pointer;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            aspect-ratio: 1 / 1; /* TORNA O BOTÃO QUADRADO PERFEITO */
+            aspect-ratio: 1 / 1; 
             width: 100%; box-sizing: border-box;
         }
         .item:hover { border-color: var(--neon-blue); transform: translateY(-3px); background: rgba(0, 72, 255, 0.05); box-shadow: 0 0 15px rgba(0, 72, 255, 0.2); }
@@ -147,6 +166,31 @@
         }
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
+
+        /* LETREIRO DO PLAYER */
+        .song-marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            padding: 3px 0;
+        }
+
+        #current-song {
+            display: inline-block;
+            padding-left: 100%;
+            animation: songScroll 12s linear infinite;
+            font-size: 0.65rem;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        @keyframes songScroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
 
         .gif-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
         .gif-card { width: 80px; text-align: center; cursor: pointer; }
@@ -205,8 +249,11 @@
 <div class="wrapper" id="main-wrapper">
     <div class="page">
         <div class="container">
-            <h1 class="main-title">GALERIA</h1>
-            <span style="font-size: 0.6rem; color: var(--neon-white); letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold;">ID: 1777777</span>
+            <div class="header-main">
+                <img src="https://i.imgur.com/hqDqtpe.gif" class="user-photo">
+                <h1 class="main-title">GALERIA</h1>
+            </div>
+            <span style="font-size: 0.6rem; color: #fff; letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold;">ID: 1777777</span>
             <div class="content-scroll gallery-grid">
                 <div class="item" onclick="navigate(1)"><strong>GIFS</strong><span></span></div>
                 <div class="item" onclick="navigate(2)"><strong>PCBACK GIF</strong><span></span></div>
@@ -217,7 +264,9 @@
             </div>
             <div class="item" style="margin-top: 10px; aspect-ratio: auto; width: 100%; height: 30px;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
             <div id="music-player">
-                <div id="current-song" style="font-size: 0.65rem; color: var(--neon-blue); margin-bottom: 8px; font-weight: bold;">---</div>
+                <div class="song-marquee-container">
+                    <div id="current-song">---</div>
+                </div>
                 <button class="p-btn" onclick="prevSong()">❮</button>
                 <button class="p-btn" id="play-btn" onclick="playPause()">Pause</button>
                 <button class="p-btn" onclick="nextSong()">❯</button>
@@ -359,8 +408,8 @@
     function togglePlayer() { const p = document.getElementById('music-player'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
     function openZoom(el) { const img = el.querySelector('img'); if(img) { document.getElementById('zoomed-img').src = img.src; document.getElementById('zoom-overlay').style.display = 'flex'; } }
     function closeZoom() { document.getElementById('zoom-overlay').style.display = 'none'; document.getElementById('zoomed-img').src = ''; }
-    document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
+
 <div id="security-alert" style="
     display: none;
     position: fixed;
@@ -404,13 +453,11 @@
             }, 2000);
         }
 
-        // Bloqueia Botão Direito
         document.addEventListener('contextmenu', e => {
             e.preventDefault();
             showAlert();
         });
 
-        // Bloqueia Atalhos (Ctrl+U, Ctrl+S, Ctrl+Shift+I, F12)
         document.addEventListener('keydown', e => {
             if (
                 e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C') ||
@@ -423,7 +470,6 @@
             }
         });
 
-        // Bloqueia Seleção de Texto via CSS dinâmico
         const style = document.createElement('style');
         style.innerHTML = `
             * {
