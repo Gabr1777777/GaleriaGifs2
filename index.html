@@ -19,23 +19,16 @@
             font-family: 'Inter', sans-serif; overflow: hidden;
         }
 
-        /* AJUSTE DO FUNDO COM O SEU GIF */
+        /* FUNDO DA GALERIA COM SEU GIF */
         .bg-glow {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
-            background-image: url('https://i.imgur.com/4kRbv63.gif');
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://i.imgur.com/4kRbv63.gif') no-repeat center center;
             background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
             z-index: -1;
-            /* Se o GIF ainda não aparecer, remova a linha de filter abaixo para testar */
             filter: brightness(0.5); 
         }
 
-        /* TELA DE ENTRADA COM AZUL GRADIENTE SOLICITADO */
+        /* TELA DE ENTRADA COM AZUL GRADIENTE */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
@@ -181,10 +174,97 @@
             </div>
         </div>
     </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem;">GALERIA DE GIFS</h2>
+            <div class="content-scroll">
+                <div class="marquee-box"><div class="marquee-text">Modelos - AfterEffects </div></div>
+                <div class="gif-grid">
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>After - 1</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>After - 2</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>After - 3</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After - 4 </span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After - 5 </span></div>
+                </div>
+                <div class="marquee-box"><div class="marquee-text">Modelos - Blufftiler </div></div>
+                <div class="gif-grid">
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff - 1</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Bluff - 2</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff - 3</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff - 4</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff - 5</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
     </div>
 
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem;">GALERIA PCBACK GIF</h2>
+            <div class="content-scroll">
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 1</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/KKY2zqU.gif"></div><span>Pcback - 2</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem;">GALERIA PSTYLE GIF</h2>
+            <div class="content-scroll">
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/rUIzfWU.gif"></div><span>Pstyle - 1</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/dGfJDfh.gif"></div><span>Pstyle - 2</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem;">GALERIA FUNDOS</h2>
+            <div class="content-scroll">
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/eJtGG3D.png"></div><span>Fundo - 1</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/Q8XwtQZ.png"></div><span>Fundo - 2</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem;">GALERIA PSTYLE ESTÁTICO</h2>
+            <div class="content-scroll">
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/zlcL7Dh.png"></div><span>Estático - 1</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem;">GALERIA PCBACK ESTÁTICO</h2>
+            <div class="content-scroll">
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/OyX4Jwt.png"></div><span>PB Estático - 1</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+</div>
+
 <script>
-    // Scripts originais mantidos integralmente
     const playlist = [
         { name: "Eminem - You dont know", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
         { name: "The Sound of Silence – Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
