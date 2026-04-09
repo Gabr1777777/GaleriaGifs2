@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WRS | Digital Experience</title>
+    <title>WRS | Digital Design</title>
     <style>
         :root {
             --neon-blue: #0048FF;
-            --silver-text: linear-gradient(135deg, #ffffff 0%, #a1a1a1 100%);
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
+            --silver-grad: linear-gradient(135deg, #C0C0C0, #808080);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --anim-speed: 0.8s;
         }
 
         body, html {
@@ -17,207 +18,205 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #020202;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: white;
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
             overflow: hidden;
         }
 
-        /* Fundo com efeito de profundidade */
-        .bg-overlay {
+        /* Fundo com efeito de luzes */
+        .bg-glow {
             position: fixed;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000 100%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(0, 72, 255, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(192, 192, 192, 0.1) 0%, transparent 40%);
             z-index: -1;
         }
 
-        .glow-sphere {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 72, 255, 0.12) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-
-        /* TELA DE ENTRADA */
-        #landing-page {
+        /* --- TELA DE ENTRADA --- */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            background: #050505;
+            z-index: 100;
+            transition: opacity var(--anim-speed) ease, visibility var(--anim-speed);
         }
 
-        .brand-logo {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: var(--silver-text);
+        .btn-enter {
+            padding: 20px 60px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            background: linear-gradient(45deg, #0048FF, #00d4ff, #0048FF);
+            background-size: 200% auto;
+            transition: 0.5s;
+            box-shadow: 0 0 20px rgba(0, 72, 255, 0.4);
+            animation: gradientMove 3s linear infinite;
+        }
+
+        .btn-enter:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(0, 72, 255, 0.7);
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- CONTEÚDO PRINCIPAL --- */
+        #main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--anim-speed) ease, transform var(--anim-speed) ease;
+            visibility: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .profile-header h1 {
+            font-size: 2rem;
+            background: var(--silver-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 10px;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+            margin-bottom: 5px;
+            letter-spacing: 2px;
         }
 
-        .enter-btn {
-            padding: 15px 60px;
-            background: transparent;
-            border: 1px solid var(--neon-blue);
-            color: white;
-            font-size: 0.9rem;
-            letter-spacing: 5px;
-            cursor: pointer;
-            transition: 0.5s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .enter-btn:hover {
-            background: var(--neon-blue);
-            box-shadow: 0 0 30px var(--neon-blue);
-        }
-
-        /* PÁGINA DE CONTEÚDO (PCBACK) */
-        #main-content {
-            display: none; /* Escondido inicialmente */
-            opacity: 0;
-            height: 100vh;
-            padding: 40px 20px;
-            box-sizing: border-box;
-            overflow-y: auto;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .content-card {
-            width: 100%;
-            max-width: 600px;
-            background: var(--glass);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            padding: 40px;
-            margin-top: 20px;
-        }
-
-        .category-title {
+        .id-badge {
+            font-size: 0.7rem;
             color: var(--neon-blue);
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            display: block;
         }
 
-        .pcback-grid {
+        .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
         }
 
-        .pcback-item {
-            aspect-ratio: 16/9;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
+        .item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
             border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.7rem;
-            color: #666;
+            padding: 15px;
             transition: 0.3s;
             cursor: pointer;
         }
 
-        .pcback-item:hover {
+        .item:hover {
             border-color: var(--neon-blue);
-            color: white;
-            background: rgba(0, 72, 255, 0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 72, 255, 0.3);
         }
 
-        /* UTILIDADES */
-        .hidden {
-            display: none !important;
+        .item span {
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 8px;
+            color: #aaa;
         }
 
-        .fade-in {
-            display: flex !important;
-            animation: fadeInAnim 1s forwards;
+        .footer-text {
+            font-size: 0.65rem;
+            color: #555;
+            margin-top: 25px;
         }
 
-        @keyframes fadeInAnim {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Classe para ativar a transição via JS */
+        .loaded #splash-screen {
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .propriedade {
-            position: fixed;
-            bottom: 20px;
-            font-size: 0.6rem;
-            color: #333;
-            letter-spacing: 2px;
+        .loaded #main-content {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
         }
     </style>
 </head>
 <body>
 
-<div class="bg-overlay"></div>
-<div class="glow-sphere"></div>
+<div class="bg-glow"></div>
 
-<section id="landing-page">
-    <div class="brand-logo">WRS</div>
-    <button class="enter-btn" onclick="entrar()">ENTRAR</button>
-    <div class="propriedade">PROPRIEDADE DE GABR (1777777)</div>
-</section>
+<div id="splash-screen">
+    <button class="btn-enter" onclick="enterGallery()">Entrar</button>
+</div>
 
-<section id="main-content">
-    <div class="content-card">
-        <div class="category-title">Explore</div>
-        <h2 style="font-weight: 300; margin: 0;">PCBACK <span style="color: var(--neon-blue);">COLLECTION</span></h2>
-        
-        <div class="pcback-grid">
-            <div class="pcback-item">GIF PREVIEW 1</div>
-            <div class="pcback-item">GIF PREVIEW 2</div>
-            <div class="pcback-item">GIF PREVIEW 3</div>
-            <div class="pcback-item">GIF PREVIEW 4</div>
-            <div class="pcback-item">GIF PREVIEW 5</div>
-            <div class="pcback-item">GIF PREVIEW 6</div>
+<div id="main-content">
+    <div class="container">
+        <div class="profile-header">
+            <h1>WRS DESIGN</h1>
+            <span class="id-badge">Propriedade de Gabr (1777777)</span>
         </div>
 
-        <p style="font-size: 0.8rem; color: #555; margin-top: 40px; text-align: center;">
-            Designs exclusivos desenvolvidos para xat.com
-        </p>
+        <div class="gallery-grid">
+            <div class="item">
+                <strong>PCBACK</strong>
+                <span>Visual Styles</span>
+            </div>
+            <div class="item">
+                <strong>GIF SHOP</strong>
+                <span>Premium Assets</span>
+            </div>
+            <div class="item">
+                <strong>LAYOUTS</strong>
+                <span>xat.com Tech</span>
+            </div>
+            <div class="item">
+                <strong>PROJECTS</strong>
+                <span>Active Works</span>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            &copy; 2026 WRS Hub. Todos os direitos reservados.
+        </div>
     </div>
-</section>
+</div>
 
 <script>
-    function entrar() {
-        const landing = document.getElementById('landing-page');
-        const content = document.getElementById('main-content');
-
-        // Efeito de saída
-        landing.style.opacity = '0';
-        landing.style.transform = 'scale(1.1)';
-
-        setTimeout(() => {
-            landing.classList.add('hidden');
-            content.classList.add('fade-in');
-            document.body.style.overflowY = 'auto'; // Habilita scroll na segunda página
-        }, 800);
+    function enterGallery() {
+        document.body.classList.add('loaded');
     }
 
-    // Segurança básica
-    document.addEventListener('contextmenu', e => e.preventDefault());
+    // Bloqueio básico de inspeção
+    document.addEventListener('contextmenu', event => event.preventDefault());
     document.onkeydown = function(e) {
-        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
+        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))) {
             return false;
         }
-    };
+    }
 </script>
 
 </body>
