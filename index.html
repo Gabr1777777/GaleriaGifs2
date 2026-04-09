@@ -101,6 +101,14 @@
             width: 80px; height: 80px;
             display: flex; align-items: center; justify-content: center;
             overflow: hidden; margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* EFEITO PASSAR MOUSE NA GIF */
+        .gif-card:hover .gif-img-box {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+            transform: scale(1.05);
         }
 
         .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
@@ -149,10 +157,11 @@
             <div class="item" style="margin-top: 10px; flex-shrink: 0;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
 
             <div id="music-player">
-                <div id="current-song" style="font-size: 0.65rem; color: var(--neon-blue); margin-bottom: 5px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">---</div>
+                <div id="current-song" style="font-size: 0.65rem; color: var(--neon-blue); margin-bottom: 8px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">---</div>
                 <button class="p-btn" onclick="prevSong()">❮</button>
                 <button class="p-btn" id="play-btn" onclick="playPause()">Pause</button>
                 <button class="p-btn" onclick="nextSong()">❯</button>
+                <button class="p-btn" id="vol-btn" onclick="toggleVolume()">Vol: 100%</button>
             </div>
         </div>
     </div>
@@ -221,6 +230,7 @@
 
     let currentTrack = 0;
     const audio = new Audio();
+    let volState = 2; // 0: Mute, 1: 50%, 2: 100%
 
     function loadTrack(index) {
         currentTrack = index;
@@ -254,6 +264,14 @@
         const btn = document.getElementById('play-btn');
         if (audio.paused) { audio.play(); btn.innerText = "Pause"; }
         else { audio.pause(); btn.innerText = "Play"; }
+    }
+
+    function toggleVolume() {
+        const btn = document.getElementById('vol-btn');
+        volState = (volState + 1) % 3;
+        if (volState === 0) { audio.volume = 0; btn.innerText = "Mudo"; }
+        else if (volState === 1) { audio.volume = 0.5; btn.innerText = "Vol: 50%"; }
+        else { audio.volume = 1.0; btn.innerText = "Vol: 100%"; }
     }
 
     function openCategory() { document.getElementById('main-wrapper').style.transform = 'translateX(-100vw)'; }
