@@ -19,17 +19,21 @@
             font-family: 'Inter', sans-serif; overflow: hidden;
         }
 
+        /* FUNDO DA GALERIA ATUALIZADO */
         .bg-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(0, 72, 255, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(192, 192, 192, 0.1) 0%, transparent 40%);
+            background: url('https://i.imgur.com/4kRbv63.gif') no-repeat center center;
+            background-size: cover;
             z-index: -1;
+            filter: brightness(0.6); /* Ajuste leve para não ofuscar o conteúdo */
         }
 
+        /* TELA DE ENTRADA COM AZUL GRADIENTE */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
-            background: #050505; z-index: 100;
+            background: linear-gradient(135deg, #001a4d 0%, #0048FF 100%); 
+            z-index: 100;
             transition: opacity var(--anim-speed) ease;
         }
 
@@ -39,6 +43,7 @@
             border: none; border-radius: 10px; cursor: pointer;
             background: linear-gradient(45deg, #0048FF, #00d4ff, #0048FF);
             background-size: 200% auto; animation: gradientMove 3s infinite;
+            box-shadow: 0 0 20px rgba(0, 72, 255, 0.5);
         }
 
         @keyframes gradientMove { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
@@ -299,7 +304,7 @@
     function nextSong() { currentTrack = (currentTrack + 1) % playlist.length; loadTrack(currentTrack); audio.play(); }
     function prevSong() { currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; loadTrack(currentTrack); audio.play(); }
     function playPause() { const b = document.getElementById('play-btn'); if (audio.paused) { audio.play(); b.innerText = "Pause"; } else { audio.pause(); b.innerText = "Play"; } }
-    function toggleVolume() { const b = document.getElementById('vol-btn'); volState = (volState + 1) % 3; if (volState === 0) { audio.volume = 0; b.innerText = "Mudo"; } else if (volState === 1) { audio.volume = 0.5; b.innerText = "Vol: 50%"; } else { audio.volume = 1.0; b.innerText = "Vol: 100%"; } }
+    function toggleVolume() { const b = document.getElementById('vol-btn'); volState = (volState + 1) % 3; if (volState === 0) { audio.volume = 0; b.innerText = "Mudo"; } else if (volState === 1) { audio.volume = 0.5; b.innerText = "Vol: 50%"; } else { audio.volume = 1.0; b.innerText = "Vol: 100%|"; } }
     function navigate(i) { document.getElementById('main-wrapper').style.transform = `translateX(-${i * 100}vw)`; }
     function togglePlayer() { const p = document.getElementById('music-player'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
     function openZoom(el) { const img = el.querySelector('img'); if(img) { document.getElementById('zoomed-img').src = img.src; document.getElementById('zoom-overlay').style.display = 'flex'; } }
