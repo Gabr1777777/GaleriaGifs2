@@ -35,16 +35,16 @@
         }
 
         .btn-enter {
-            padding: 18px 50px; font-size: 1.1rem; font-weight: bold;
+            padding: 15px 40px; font-size: 1rem; font-weight: bold;
             text-transform: uppercase; letter-spacing: 5px; color: white;
-            border: none; border-radius: 12px; cursor: pointer;
+            border: none; border-radius: 10px; cursor: pointer;
             background: linear-gradient(45deg, #0048FF, #00d4ff, #0048FF);
             background-size: 200% auto; animation: gradientMove 3s infinite;
         }
 
         @keyframes gradientMove { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
 
-        /* CONTAINER DE TRANSIÇÃO (PÁGINAS) */
+        /* CONTAINER DE TRANSIÇÃO */
         .wrapper {
             display: flex; width: 200vw; height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
@@ -56,84 +56,83 @@
         }
 
         .container {
-            width: 90%; max-width: 480px; height: 90vh;
+            width: 85%; max-width: 420px; height: 85vh;
             background: var(--glass-bg); backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border); border-radius: 24px;
+            border: 1px solid var(--glass-border); border-radius: 20px;
             padding: 20px; text-align: center; display: flex; flex-direction: column;
         }
 
-        /* Área de conteúdo rolável na container */
         .content-scroll {
-            overflow-y: auto; flex-grow: 1; padding-right: 5px;
-            scrollbar-width: thin; scrollbar-color: var(--neon-blue) rgba(255,255,255,0.05);
+            overflow-y: auto; flex-grow: 1; padding: 10px 5px;
+            scrollbar-width: thin; scrollbar-color: var(--neon-blue) transparent;
         }
-        .content-scroll::-webkit-scrollbar { width: 5px; }
-        .content-scroll::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 5px; }
+        .content-scroll::-webkit-scrollbar { width: 4px; }
+        .content-scroll::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
 
-        /* GRID PRINCIPAL */
-        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: auto; margin-bottom: auto;}
+        /* GRID PRINCIPAL - BOTÕES MENORES */
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .item {
             background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
-            border-radius: 12px; padding: 18px 10px; transition: 0.3s; cursor: pointer;
+            border-radius: 10px; padding: 12px 8px; transition: 0.3s; cursor: pointer;
         }
-        .item:hover { border-color: var(--neon-blue); transform: translateY(-3px); background: rgba(0, 72, 255, 0.05); }
+        .item:hover { border-color: var(--neon-blue); transform: translateY(-2px); background: rgba(0, 72, 255, 0.05); }
+        .item strong { font-size: 0.75rem; display: block; }
+        .item span { font-size: 0.6rem; color: #666; }
 
-        /* MARQUEE (LETREIRO) */
+        /* MARQUEE */
         .marquee-box {
-            background: rgba(0, 72, 255, 0.15);
+            background: rgba(0, 72, 255, 0.12);
             border-top: 1px solid var(--neon-blue);
             border-bottom: 1px solid var(--neon-blue);
-            padding: 8px 0; margin: 20px 0 15px 0;
+            padding: 5px 0; margin: 15px 0 10px 0;
             overflow: hidden; white-space: nowrap; flex-shrink: 0;
         }
 
         .marquee-text {
             display: inline-block;
             animation: marquee 10s linear infinite;
-            font-size: 0.8rem; font-weight: bold; color: #fff;
-            text-transform: uppercase; letter-spacing: 2px;
+            font-size: 0.7rem; font-weight: bold; color: #fff;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        @keyframes marquee {
-            0% { transform: translate(100%, 0); }
-            100% { transform: translate(-100%, 0); }
-        }
+        @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* EXIBIÇÃO DAS GIFS */
+        /* EXIBIÇÃO DAS GIFS 80x80 */
         .gif-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
         }
 
         .gif-card {
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            padding: 8px;
+            border-radius: 8px;
+            padding: 4px;
+            width: 80px; /* Largura fixa */
+            height: 80px; /* Altura fixa */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
             transition: 0.3s;
         }
 
-        .gif-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 6px;
-            display: block;
-        }
+        .gif-card:hover { border-color: var(--neon-blue); background: rgba(0, 72, 255, 0.08); }
 
-        .gif-card span {
-            display: block;
-            font-size: 0.6rem;
-            color: #777;
-            margin-top: 5px;
-            text-transform: uppercase;
+        .gif-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
         }
 
         .btn-back {
             background: none; border: 1px solid #444; color: #fff;
-            padding: 10px 25px; border-radius: 8px; cursor: pointer; margin-top: auto; margin-bottom: 10px;
-            transition: 0.3s; flex-shrink: 0;
+            padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;
+            margin-top: auto; transition: 0.3s; flex-shrink: 0;
         }
         .btn-back:hover { background: #fff; color: #000; }
 
@@ -141,9 +140,9 @@
         #music-player { 
             margin-top: 10px; padding: 10px; 
             background: rgba(0, 72, 255, 0.08); border: 1px solid var(--glass-border);
-            border-radius: 15px; display: none; flex-shrink: 0;
+            border-radius: 12px; display: none; flex-shrink: 0;
         }
-        .p-btn { background: none; border: 1px solid #fff; color: #fff; padding: 3px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; margin: 0 3px; }
+        .p-btn { background: none; border: 1px solid #fff; color: #fff; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; margin: 0 2px; }
 
         .loaded #splash-screen { opacity: 0; visibility: hidden; }
     </style>
@@ -159,8 +158,8 @@
 <div class="wrapper" id="main-wrapper">
     <div class="page">
         <div class="container">
-            <h1 style="background: var(--silver-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px; font-weight: 900; margin-top: 0;">WRS DESIGN</h1>
-            <span style="font-size: 0.65rem; color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 20px; display: block; font-weight: bold;">ID: 1777777</span>
+            <h1 style="background: var(--silver-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px; font-weight: 900; margin: 0; font-size: 1.5rem;">WRS DESIGN</h1>
+            <span style="font-size: 0.6rem; color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold;">ID: 1777777</span>
 
             <div class="content-scroll gallery-grid">
                 <div class="item" onclick="openCategory()"><strong>GIFS</strong><span>Galeria</span></div>
@@ -174,7 +173,7 @@
             <div class="item" style="margin-top: 10px; flex-shrink: 0;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
 
             <div id="music-player">
-                <div id="current-song" style="font-size: 0.7rem; color: var(--neon-blue); margin-bottom: 8px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">---</div>
+                <div id="current-song" style="font-size: 0.65rem; color: var(--neon-blue); margin-bottom: 5px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">---</div>
                 <button class="p-btn" onclick="prevSong()">❮</button>
                 <button class="p-btn" id="play-btn" onclick="playPause()">Pause</button>
                 <button class="p-btn" onclick="nextSong()">❯</button>
@@ -184,43 +183,38 @@
 
     <div class="page">
         <div class="container">
-            <h2 style="font-size: 1rem; color: #fff; letter-spacing: 2px; margin-top: 0;">MODELOS DISPONÍVEIS</h2>
+            <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">GALERIA DE GIFS</h2>
 
             <div class="content-scroll">
                 <div class="marquee-box"><div class="marquee-text">Modelos AfterEffects - 400 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"><span>After - 1</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"><span>After - 2</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"><span>After - 3</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"><span>After - 4</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"><span>After - 5</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"></div>
                 </div>
 
                 <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"><span>Bluff - 1</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"><span>Bluff - 2</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"><span>Bluff - 3</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"><span>Bluff - 4</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"><span>Bluff - 5</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"></div>
                 </div>
 
                 <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"><span>Canva - 1</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"><span>Canva - 2</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"><span>Canva - 3</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"><span>Canva - 4</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"><span>Canva - 5</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"></div>
                 </div>
 
                 <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"><span>Space - 1</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"><span>Space - 2</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"><span>Space - 3</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"><span>Space - 4</span></div>
-                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"><span>Space - 5</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"></div>
                 </div>
             </div>
 
@@ -249,10 +243,7 @@
     function enterGallery() {
         document.body.classList.add('loaded');
         loadTrack(0);
-        audio.play().catch(e => {
-            console.log("Autoplay blocked. User interaction needed.");
-            document.getElementById('play-btn').innerText = "Play";
-        });
+        audio.play().catch(() => { document.getElementById('play-btn').innerText = "Play"; });
     }
 
     audio.onended = function() { nextSong(); };
@@ -260,13 +251,15 @@
     function nextSong() {
         currentTrack = (currentTrack + 1) % playlist.length;
         loadTrack(currentTrack);
-        audio.play().then(() => { document.getElementById('play-btn').innerText = "Pause"; });
+        audio.play();
+        document.getElementById('play-btn').innerText = "Pause";
     }
 
     function prevSong() {
         currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
         loadTrack(currentTrack);
-        audio.play().then(() => { document.getElementById('play-btn').innerText = "Pause"; });
+        audio.play();
+        document.getElementById('play-btn').innerText = "Pause";
     }
 
     function playPause() {
