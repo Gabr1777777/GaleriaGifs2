@@ -90,6 +90,7 @@
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
+        /* GALERIA PEQUENA */
         .gif-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
         .gif-card { width: 80px; text-align: center; }
         .gif-img-box {
@@ -99,8 +100,9 @@
             overflow: hidden; margin-bottom: 4px;
         }
         .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; }
+        .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; display: block; }
 
+        /* LISTAS COM ZOOM */
         .pcback-list { display: flex; flex-direction: column; gap: 20px; align-items: center; }
         .pcback-card { width: 100%; max-width: 320px; text-align: center; }
         .pcback-img-box {
@@ -179,6 +181,7 @@
         <div class="container">
             <h2 style="font-size: 0.9rem;">GALERIA DE GIFS</h2>
             <div class="content-scroll">
+                
                 <div class="marquee-box"><div class="marquee-text">Modelos AfterEffects - 400 xats •</div></div>
                 <div class="gif-grid">
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>After-1</span></div>
@@ -187,7 +190,44 @@
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After-4</span></div>
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After-5</span></div>
                 </div>
+
+                <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff-1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Bluff-2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff-3</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff-4</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff-5</span></div>
                 </div>
+
+                <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Canva-1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Canva-2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Canva-3</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Canva-4</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Canva-5</span></div>
+                </div>
+
+                <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Space-1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Space-2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Space-3</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Space-4</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Space-5</span></div>
+                </div>
+
+                <div class="marquee-box"><div class="marquee-text">Modelo Santa - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Santa-1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Santa-2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Santa-3</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Santa-4</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Santa-5</span></div>
+                </div>
+
+            </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
         </div>
     </div>
