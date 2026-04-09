@@ -14,19 +14,13 @@
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #050505;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #050505; color: #ffffff;
+            font-family: 'Inter', sans-serif; overflow: hidden;
         }
 
         .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 10% 20%, rgba(0, 72, 255, 0.15) 0%, transparent 40%),
                         radial-gradient(circle at 90% 80%, rgba(192, 192, 192, 0.1) 0%, transparent 40%);
             z-index: -1;
@@ -34,148 +28,80 @@
 
         /* TELA DE ENTRADA */
         #splash-screen {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #050505;
-            z-index: 100;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            background: #050505; z-index: 100;
             transition: opacity var(--anim-speed) ease, visibility var(--anim-speed);
         }
 
         .btn-enter {
-            padding: 18px 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            background: linear-gradient(45deg, #0048FF, #00d4ff, #0048FF, #00d4ff);
-            background-size: 300% auto;
-            transition: 0.5s;
-            box-shadow: 0 0 20px rgba(0, 72, 255, 0.4);
-            animation: gradientMove 4s ease infinite;
+            padding: 18px 50px; font-size: 1.1rem; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 5px; color: white;
+            border: none; border-radius: 12px; cursor: pointer;
+            background: linear-gradient(45deg, #0048FF, #00d4ff, #0048FF);
+            background-size: 200% auto; animation: gradientMove 3s infinite;
         }
 
-        .btn-enter:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 35px rgba(0, 72, 255, 0.6);
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes gradientMove { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
 
         /* CONTEÚDO PRINCIPAL */
         #main-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity var(--anim-speed) ease, transform var(--anim-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            visibility: hidden;
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            opacity: 0; transform: scale(0.95); visibility: hidden;
+            transition: all var(--anim-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .container {
-            width: 90%;
-            max-width: 450px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            width: 90%; max-width: 480px;
+            background: var(--glass-bg); backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border); border-radius: 24px;
+            padding: 35px 25px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.6);
         }
 
         .profile-header h1 {
-            font-size: 1.8rem;
-            background: var(--silver-grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-            letter-spacing: 3px;
-            font-weight: 800;
+            font-size: 1.8rem; background: var(--silver-grad);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 5px; letter-spacing: 3px; font-weight: 800;
         }
 
         .id-badge {
-            font-size: 0.65rem;
-            color: var(--neon-blue);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            display: block;
-            opacity: 0.8;
+            font-size: 0.65rem; color: var(--neon-blue); letter-spacing: 2px;
+            margin-bottom: 30px; display: block; opacity: 0.8;
         }
 
-        /* GRID CUSTOMIZADA */
         .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
         }
 
         .item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 20px 10px;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+            border-radius: 12px; padding: 18px 10px; transition: 0.3s; cursor: pointer;
         }
 
-        .item:hover {
-            border-color: var(--neon-blue);
-            background: rgba(0, 72, 255, 0.05);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        .item:hover { border-color: var(--neon-blue); transform: translateY(-3px); background: rgba(0, 72, 255, 0.05); }
+        .item strong { font-size: 0.8rem; color: #eee; display: block; }
+        .item span { font-size: 0.65rem; color: #555; text-transform: uppercase; margin-top: 4px; display: block; }
+
+        /* PLAYER DE MUSICA */
+        #music-player {
+            margin-top: 20px; padding: 15px;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            border-radius: 15px; display: none; animation: fadeIn 0.5s;
         }
 
-        .item strong {
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            color: #eee;
+        .btn-music {
+            grid-column: span 2; border-color: #fff; margin-top: 10px;
         }
 
-        .item span {
-            font-size: 0.7rem;
-            margin-top: 6px;
-            color: #666;
-            text-transform: uppercase;
-        }
+        .controls { display: flex; justify-content: center; gap: 15px; align-items: center; margin-top: 10px; }
+        .controls button { background: none; border: 1px solid #444; color: white; cursor: pointer; padding: 5px 10px; border-radius: 5px; }
+        .song-info { font-size: 0.7rem; color: var(--neon-blue); margin-bottom: 5px; }
 
-        .footer-text {
-            font-size: 0.6rem;
-            color: #444;
-            margin-top: 30px;
-            letter-spacing: 1px;
-        }
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
 
-        /* ESTADOS DE TRANSIÇÃO */
-        .loaded #splash-screen {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loaded #main-content {
-            opacity: 1;
-            transform: scale(1);
-            visibility: visible;
-        }
+        /* ESTADOS */
+        .loaded #splash-screen { opacity: 0; visibility: hidden; }
+        .loaded #main-content { opacity: 1; transform: scale(1); visibility: visible; }
     </style>
 </head>
 <body>
@@ -190,47 +116,90 @@
     <div class="container">
         <div class="profile-header">
             <h1>WRS DESIGN</h1>
-            <span class="id-badge">Propriedade de Gabr (1777777)</span>
+            <span class="id-badge">ID: GABR (1777777)</span>
         </div>
 
         <div class="gallery-grid">
-            <div class="item">
-                <strong>GIFS</strong>
-                <span>Collection</span>
-            </div>
-            <div class="item">
-                <strong>PCBACK GIF</strong>
-                <span>Visuals</span>
-            </div>
+            <div class="item"><strong>GIFS</strong><span>Library</span></div>
+            <div class="item"><strong>PCBACK GIF</strong><span>Animated</span></div>
+            <div class="item"><strong>PSTYLE GIF</strong><span>Premium</span></div>
+            <div class="item"><strong>FUNDOS</strong><span>Wallpapers</span></div>
+            <div class="item"><strong>PSTYLE ESTÁTICO</strong><span>Classic</span></div>
+            <div class="item"><strong>PCBACK ESTÁTICO</strong><span>Desktop</span></div>
             
-            <div class="item">
-                <strong>PSTYLE</strong>
-                <span>Premium</span>
-            </div>
-            <div class="item">
-                <strong>FUNDOS</strong>
-                <span>Wallpapers</span>
+            <div class="item btn-music" onclick="togglePlayer()">
+                <strong>MUSIC PLAYER</strong>
+                <span id="player-status">Clique para Abrir</span>
             </div>
         </div>
 
-        <div class="footer-text">
-            &copy; 2026 WRS HUB &bull; DIGITAL ART TRADEMARK
+        <div id="music-player">
+            <div class="song-info" id="current-song">Música: ---</div>
+            <div class="controls">
+                <button onclick="prevSong()">❮</button>
+                <button onclick="playPause()" id="play-btn">Play</button>
+                <button onclick="nextSong()">❯</button>
+            </div>
         </div>
+
+        <div class="footer-text" style="font-size: 0.6rem; color: #444; margin-top: 25px;">&copy; 2026 WRS HUB</div>
     </div>
 </div>
 
 <script>
-    function enterGallery() {
-        document.body.classList.add('loaded');
+    const playlist = [
+        { name: "Eminem - You dont know", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
+        { name: "The Sound of Silence – Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
+        { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=0yenl8sh&raw=1" }
+    ];
+
+    let currentTrack = 0;
+    const audio = new Audio();
+    const playBtn = document.getElementById('play-btn');
+    const songInfo = document.getElementById('current-song');
+
+    function enterGallery() { document.body.classList.add('loaded'); }
+
+    function togglePlayer() {
+        const player = document.getElementById('music-player');
+        player.style.display = (player.style.display === 'block') ? 'none' : 'block';
+        if (audio.src === "") loadSong(0);
     }
 
-    // Bloqueio de inspeção
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0))) {
-            return false;
+    function loadSong(index) {
+        currentTrack = index;
+        audio.src = playlist[index].url;
+        songInfo.innerText = playlist[index].name;
+    }
+
+    function playPause() {
+        if (audio.paused) {
+            audio.play();
+            playBtn.innerText = "Pause";
+        } else {
+            audio.pause();
+            playBtn.innerText = "Play";
         }
     }
+
+    function nextSong() {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        loadSong(currentTrack);
+        audio.play();
+        playBtn.innerText = "Pause";
+    }
+
+    function prevSong() {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        loadSong(currentTrack);
+        audio.play();
+        playBtn.innerText = "Pause";
+    }
+
+    audio.onended = () => nextSong();
+
+    // Proteção básica
+    document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
 
 </body>
