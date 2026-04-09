@@ -101,18 +101,18 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 5px;
-            min-height: 65px; /* Ajuste para acomodar o avatar maior */
+            min-height: 65px; 
         }
 
         .user-photo {
-            width: 60px; /* AUMENTADO DE 45px PARA 60px */
-            height: 60px; /* AUMENTADO DE 45px PARA 60px */
+            width: 60px; 
+            height: 60px; 
             border-radius: 8px;
             border: 1px solid var(--neon-blue);
             box-shadow: 0 0 10px rgba(0, 72, 255, 0.3);
             background: var(--silver-grad);
             padding: 2px;
-            flex-shrink: 0; /* Garante que não diminua */
+            flex-shrink: 0; 
         }
 
         .main-title {
@@ -253,9 +253,12 @@
         <div class="container">
             <div class="header-main">
                 <img src="https://i.imgur.com/hqDqtpe.gif" class="user-photo">
-                <h1 class="main-title">GALERIA</h1>
+                <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <h1 class="main-title">GALERIA</h1>
+                    <span style="font-size: 0.6rem; color: #fff; letter-spacing: 2px; font-weight: bold; margin-top: -3px; text-shadow: 0 0 5px #fff, 0 0 10px #fff;">ID: 1777777</span>
+                </div>
             </div>
-            <span style="font-size: 0.6rem; color: #fff; letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold;">ID: 1777777</span>
+            
             <div class="content-scroll gallery-grid">
                 <div class="item" onclick="navigate(1)"><strong>GIFS</strong><span></span></div>
                 <div class="item" onclick="navigate(2)"><strong>PCBACK GIF</strong><span></span></div>
@@ -356,7 +359,7 @@
                 <div class="pcback-list">
                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/eJtGG3D.png"></div><span>Fundo - 1</span></div>
                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/Q8XwtQZ.png"></div><span>Fundo - 2</span></div>
-                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/6phSrhR.png"></div><span>Fundo - 1</span></div>
+                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/6phSrevS.png"></div><span>Fundo - 1</span></div>
                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/yeQZf5S.png"></div><span>Fundo - 2</span></div>
                 </div>
             </div>
