@@ -103,17 +103,26 @@
         .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; display: block; }
 
-        /* PCBACKS GRANDES */
+        /* PCBACKS */
         .pcback-list { display: flex; flex-direction: column; gap: 20px; align-items: center; }
         .pcback-card { width: 100%; max-width: 320px; text-align: center; }
         .pcback-img-box {
             background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
             border-radius: 12px; width: 100%; overflow: hidden; margin-bottom: 8px;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; cursor: zoom-in;
         }
         .pcback-card:hover .pcback-img-box { border-color: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue); }
         .pcback-img-box img { width: 100%; height: auto; display: block; }
         .pcback-card span { font-size: 0.7rem; color: #fff; font-weight: bold; text-transform: uppercase; }
+
+        /* EFEITO ZOOM (MODAL) */
+        #zoom-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: none; justify-content: center;
+            align-items: center; z-index: 1000; cursor: zoom-out;
+            backdrop-filter: blur(10px);
+        }
+        #zoom-overlay img { max-width: 90%; max-height: 90%; border-radius: 15px; border: 2px solid var(--neon-blue); box-shadow: 0 0 30px var(--neon-blue); }
 
         .btn-back {
             background: none; border: 1px solid #444; color: #fff;
@@ -135,6 +144,10 @@
 <body>
 
 <div class="bg-glow"></div>
+
+<div id="zoom-overlay" onclick="closeZoom()">
+    <img id="zoomed-img" src="">
+</div>
 
 <div id="splash-screen">
     <button class="btn-enter" onclick="enterGallery()">Entrar</button>
@@ -171,7 +184,6 @@
         <div class="container">
             <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">GALERIA DE GIFS</h2>
             <div class="content-scroll">
-                
                 <div class="marquee-box"><div class="marquee-text">Modelos AfterEffects - 400 xats •</div></div>
                 <div class="gif-grid">
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>After - 1</span></div>
@@ -189,33 +201,6 @@
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff - 4</span></div>
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff - 5</span></div>
                 </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Canva - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Canva - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Canva - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Canva - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Canva - 5</span></div>
-                </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Space - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Space - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Space - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Space - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Space - 5</span></div>
-                </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelo Santa - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Santa - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Santa - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Santa - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Santa - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Santa - 5</span></div>
-                </div>
             </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
         </div>
@@ -227,11 +212,11 @@
             <div class="content-scroll">
                 <div class="marquee-box"><div class="marquee-text">Premium PCBACK Animated • Alta Qualidade •</div></div>
                 <div class="pcback-list">
-                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 1</span></div>
-                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/KKY2zqU.gif"></div><span>Pcback - 2</span></div>
-                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/fmhynyY.gif"></div><span>Pcback - 3</span></div>
-                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/28xDTg0.gif"></div><span>Pcback - 4</span></div>
-                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/9R35WMu.gif"></div><span>Pcback - 5</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 1</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/KKY2zqU.gif"></div><span>Pcback - 2</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/fmhynyY.gif"></div><span>Pcback - 3</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/28xDTg0.gif"></div><span>Pcback - 4</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/9R35WMu.gif"></div><span>Pcback - 5</span></div>
                 </div>
             </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
@@ -299,6 +284,18 @@
     function togglePlayer() {
         const p = document.getElementById('music-player');
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // FUNÇÕES DE ZOOM
+    function openZoom(element) {
+        const imgSrc = element.querySelector('img').src;
+        document.getElementById('zoomed-img').src = imgSrc;
+        document.getElementById('zoom-overlay').style.display = 'flex';
+    }
+
+    function closeZoom() {
+        document.getElementById('zoom-overlay').style.display = 'none';
+        document.getElementById('zoomed-img').src = '';
     }
 
     document.addEventListener('contextmenu', e => e.preventDefault());
