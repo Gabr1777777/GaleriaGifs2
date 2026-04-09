@@ -42,8 +42,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 150vw;
-            height: 150vh;
+            width: 100vw;
+            height: 100vh;
             background-image: url('https://i.imgur.com/4kRbv63.gif');
             background-size: cover;
             background-position: center;
@@ -101,16 +101,18 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 5px;
+            min-height: 65px; /* Ajuste para acomodar o avatar maior */
         }
 
         .user-photo {
-            width: 60px;
-            height: 60px;
+            width: 60px; /* AUMENTADO DE 45px PARA 60px */
+            height: 60px; /* AUMENTADO DE 45px PARA 60px */
             border-radius: 8px;
             border: 1px solid var(--neon-blue);
             box-shadow: 0 0 10px rgba(0, 72, 255, 0.3);
             background: var(--silver-grad);
             padding: 2px;
+            flex-shrink: 0; /* Garante que não diminua */
         }
 
         .main-title {
