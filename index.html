@@ -17,12 +17,19 @@
             100% { background-position: 200% center; }
         }
 
+        /* ANIMAÇÃO FLUTUANTE DO BOTAO */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
         :root {
             --neon-blue: #0048FF;
             --silver-grad: linear-gradient(90deg, #C0C0C0, #fff, #808080, #fff, #C0C0C0);
             --glass-bg: rgba(0, 0, 0, 0.3); 
             --glass-border: rgba(255, 255, 255, 0.08);
-            --anim-speed: 0.8s; /* Transição levemente mais suave */
+            --anim-speed: 0.8s;
         }
 
         body, html {
@@ -47,14 +54,14 @@
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
-            background: linear-gradient(-45deg, #00040a, #001d3d, #0048FF, #00040a);
+            /* FUNDO ALTERADO PARA AS CORES DA GALERIA */
+            background: linear-gradient(-45deg, #000205, #001124, #002a52, #001124);
             background-size: 400% 400%;
-            animation: splashGradient 8s ease infinite;
+            animation: splashGradient 10s ease infinite;
             z-index: 100;
             transition: all var(--anim-speed) cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* EFEITO DE SAÍDA SUAVE */
         .loaded #splash-screen { 
             opacity: 0; 
             visibility: hidden; 
@@ -66,8 +73,11 @@
             padding: 15px 40px; font-size: 1rem; font-weight: bold;
             text-transform: uppercase; letter-spacing: 5px; color: white;
             border: none; border-radius: 10px; cursor: pointer;
-            background: linear-gradient(45deg, #0048FF, #00d4ff, #0048FF);
-            background-size: 200% auto; animation: gradientMove 3s infinite;
+            /* GRADIENTE DO BOTAO ALTERADO E ADICIONADO EFEITO FLUTUANTE */
+            background: linear-gradient(45deg, #002a52, #0056a3, #002a52);
+            background-size: 200% auto;
+            animation: gradientMove 3s infinite, floating 3s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(0, 42, 82, 0.5);
         }
 
         @keyframes gradientMove { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
@@ -86,7 +96,6 @@
             padding: 20px; text-align: center; display: flex; flex-direction: column;
         }
 
-        /* TÍTULO GALERIA ANIMADO */
         .main-title {
             background: var(--silver-grad);
             background-size: 200% auto;
