@@ -65,11 +65,13 @@
         .content-scroll::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
 
         .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
+        /* Estilo base dos itens da Home */
         .item {
             background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
             border-radius: 10px; padding: 12px 8px; transition: 0.3s; cursor: pointer;
         }
-        .item:hover { border-color: var(--neon-blue); transform: translateY(-2px); background: rgba(0, 72, 255, 0.05); }
+        .item:hover { border-color: var(--neon-blue); transform: translateY(-2px); background: rgba(0, 72, 255, 0.05); box-shadow: 0 0 15px rgba(0, 72, 255, 0.2); }
         .item strong { font-size: 0.75rem; display: block; }
         .item span { font-size: 0.6rem; color: #666; }
 
@@ -90,28 +92,46 @@
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* GALERIA PEQUENA */
+        /* Efeito de passar o mouse na Galeria de GIFs (Pequenos) */
         .gif-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
-        .gif-card { width: 80px; text-align: center; }
+        .gif-card { width: 80px; text-align: center; cursor: pointer; }
         .gif-img-box {
             background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
             border-radius: 8px; width: 80px; height: 80px;
             display: flex; align-items: center; justify-content: center;
             overflow: hidden; margin-bottom: 4px;
+            transition: all 0.3s ease; /* Transição suave */
         }
         .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; display: block; }
 
-        /* LISTAS COM ZOOM */
+        /* Gatilho do Hover nos GIFs pequenos */
+        .gif-card:hover .gif-img-box {
+            border-color: var(--neon-blue);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--neon-blue);
+            background: rgba(0, 72, 255, 0.1);
+        }
+
+        /* Efeito de passar o mouse nas Listas de PCBACK/PSTYLE (Grandes) */
         .pcback-list { display: flex; flex-direction: column; gap: 20px; align-items: center; }
         .pcback-card { width: 100%; max-width: 320px; text-align: center; }
         .pcback-img-box {
             background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
             border-radius: 12px; width: 100%; overflow: hidden; margin-bottom: 8px;
-            transition: all 0.3s ease; cursor: zoom-in;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            cursor: zoom-in;
         }
         .pcback-img-box img { width: 100%; height: auto; display: block; }
-        .pcback-card span { font-size: 0.7rem; color: #fff; font-weight: bold; text-transform: uppercase; }
+        .pcback-card span { font-size: 0.7rem; color: #fff; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
+
+        /* Gatilho do Hover nas imagens grandes */
+        .pcback-card:hover .pcback-img-box {
+            border-color: var(--neon-blue);
+            transform: scale(1.03);
+            box-shadow: 0 0 25px var(--neon-blue);
+        }
+        .pcback-card:hover span { color: var(--neon-blue); }
 
         #zoom-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -181,52 +201,22 @@
         <div class="container">
             <h2 style="font-size: 0.9rem;">GALERIA DE GIFS</h2>
             <div class="content-scroll">
-                
                 <div class="marquee-box"><div class="marquee-text">Modelos AfterEffects - 400 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>After-1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>After-2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>After-3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After-4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After-5</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>After-1</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>After-2</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>After-3</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After-4</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After-5</span></div>
                 </div>
-
                 <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
                 <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff-1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Bluff-2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff-3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff-4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff-5</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff-1</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Bluff-2</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff-3</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff-4</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff-5</span></div>
                 </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Canva-1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Canva-2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Canva-3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Canva-4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Canva-5</span></div>
-                </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Space-1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Space-2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Space-3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Space-4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Space-5</span></div>
-                </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelo Santa - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Santa-1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Santa-2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Santa-3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Santa-4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Santa-5</span></div>
-                </div>
-
             </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
         </div>
@@ -375,8 +365,11 @@
     }
 
     function openZoom(el) {
-        document.getElementById('zoomed-img').src = el.querySelector('img').src;
-        document.getElementById('zoom-overlay').style.display = 'flex';
+        const img = el.querySelector('img');
+        if(img) {
+            document.getElementById('zoomed-img').src = img.src;
+            document.getElementById('zoom-overlay').style.display = 'flex';
+        }
     }
 
     function closeZoom() {
