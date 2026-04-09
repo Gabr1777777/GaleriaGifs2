@@ -361,5 +361,80 @@
     function closeZoom() { document.getElementById('zoom-overlay').style.display = 'none'; document.getElementById('zoomed-img').src = ''; }
     document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
+<div id="security-alert" style="
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--neon-blue);
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 72, 255, 0.4);
+    text-align: center;
+    pointer-events: none;
+">
+    <span style="
+        background: var(--silver-grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-size: 1rem;
+        display: block;
+    ">Copyright - Acesso Proibido</span>
+</div>
+
+<script>
+    (function() {
+        const alertBox = document.getElementById('security-alert');
+        let isShowing = false;
+
+        function showAlert() {
+            if (isShowing) return;
+            isShowing = true;
+            alertBox.style.display = 'block';
+            
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+                isShowing = false;
+            }, 2000);
+        }
+
+        // Bloqueia Botão Direito
+        document.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            showAlert();
+        });
+
+        // Bloqueia Atalhos (Ctrl+U, Ctrl+S, Ctrl+Shift+I, F12)
+        document.addEventListener('keydown', e => {
+            if (
+                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C') ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                showAlert();
+                return false;
+            }
+        });
+
+        // Bloqueia Seleção de Texto via CSS dinâmico
+        const style = document.createElement('style');
+        style.innerHTML = `
+            * {
+                -webkit-user-select: none !important;
+                -moz-user-select: none !important;
+                -ms-user-select: none !important;
+                user-select: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+    })();
+</script>
 </body>
 </html>
