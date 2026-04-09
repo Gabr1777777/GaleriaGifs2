@@ -110,18 +110,26 @@
         .content-scroll::-webkit-scrollbar { width: 4px; }
         .content-scroll::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
 
-        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 5px; } /* GAP E PADDING REDUZIDOS RIGOROSAMENTE */
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 5px; } 
         
         .item {
             background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
-            border-radius: 6px; padding: 6px 4px; transition: 0.3s; cursor: pointer; /* ALTURA, PADDING E RAIO REDUZIDOS */
-            display: flex; flex-direction: column; justify-content: center; align-items: center; height: 35px; /* ALTURA FIXA PEQUENA */
+            border-radius: 4px; padding: 10px; transition: 0.3s; cursor: pointer;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            aspect-ratio: 1 / 1; /* TORNA O BOTÃO QUADRADO PERFEITO */
+            width: 100%; box-sizing: border-box;
         }
-        .item:hover { border-color: var(--neon-blue); transform: translateY(-1px); background: rgba(0, 72, 255, 0.05); box-shadow: 0 0 10px rgba(0, 72, 255, 0.2); }
+        .item:hover { border-color: var(--neon-blue); transform: translateY(-3px); background: rgba(0, 72, 255, 0.05); box-shadow: 0 0 15px rgba(0, 72, 255, 0.2); }
         
-        /* FONTES REDUZIDAS PARA CABER NO NOVO TAMANHO */
-        .item strong { font-size: 0.65rem; display: block; line-height: 1.1; letter-spacing: 0.5px; }
-        .item span { font-size: 0.5rem; color: #888; display: block; line-height: 1; margin-top: 1px; }
+        .item strong { 
+            font-size: 0.8rem; display: block; line-height: 1.2; 
+            letter-spacing: 1px; word-wrap: break-word; text-align: center;
+            max-width: 100%;
+        }
+        .item span { 
+            font-size: 0.55rem; color: #888; display: block; 
+            line-height: 1.1; margin-top: 4px; text-transform: uppercase;
+        }
 
         .marquee-box {
             background: rgba(0, 72, 255, 0.12);
@@ -207,7 +215,8 @@
                 <div class="item" onclick="navigate(5)"><strong>PSTYLE ESTÁTICO</strong><span>Classic</span></div>
                 <div class="item" onclick="navigate(6)"><strong>PCBACK ESTÁTICO</strong><span>Desktop</span></div>
             </div>
-            <div class="item" style="margin-top: 8px; height: 25px;"><strong>MUSIC PLAYER</strong></div> <div id="music-player">
+            <div class="item" style="margin-top: 10px; aspect-ratio: auto; width: 100%; height: 30px;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
+            <div id="music-player">
                 <div id="current-song" style="font-size: 0.65rem; color: var(--neon-blue); margin-bottom: 8px; font-weight: bold;">---</div>
                 <button class="p-btn" onclick="prevSong()">❮</button>
                 <button class="p-btn" id="play-btn" onclick="playPause()">Pause</button>
