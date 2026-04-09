@@ -44,7 +44,7 @@
         @keyframes gradientMove { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
 
         .wrapper {
-            display: flex; width: 200vw; height: 100vh;
+            display: flex; width: 300vw; height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
@@ -104,7 +104,6 @@
             transition: all 0.3s ease;
         }
 
-        /* EFEITO PASSAR MOUSE NA GIF */
         .gif-card:hover .gif-img-box {
             border-color: var(--neon-blue);
             box-shadow: 0 0 15px var(--neon-blue);
@@ -146,8 +145,8 @@
             <span style="font-size: 0.6rem; color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold;">ID: 1777777</span>
 
             <div class="content-scroll gallery-grid">
-                <div class="item" onclick="openCategory()"><strong>GIFS</strong><span>Galeria</span></div>
-                <div class="item"><strong>PCBACK GIF</strong><span>Animated</span></div>
+                <div class="item" onclick="navigate(1)"><strong>GIFS</strong><span>Galeria</span></div>
+                <div class="item" onclick="navigate(2)"><strong>PCBACK GIF</strong><span>Animated</span></div>
                 <div class="item"><strong>PSTYLE GIF</strong><span>Premium</span></div>
                 <div class="item"><strong>FUNDOS</strong><span>Wallpaper</span></div>
                 <div class="item"><strong>PSTYLE ESTÁTICO</strong><span>Classic</span></div>
@@ -170,7 +169,6 @@
         <div class="container">
             <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">GALERIA DE GIFS</h2>
             <div class="content-scroll">
-                
                 <div class="marquee-box"><div class="marquee-text">Modelos AfterEffects - 400 xats •</div></div>
                 <div class="gif-grid">
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>After - 1</span></div>
@@ -179,7 +177,6 @@
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After - 4</span></div>
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After - 5</span></div>
                 </div>
-
                 <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
                 <div class="gif-grid">
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff - 1</span></div>
@@ -188,25 +185,6 @@
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff - 4</span></div>
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff - 5</span></div>
                 </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Canva - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Canva - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Canva - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Canva - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Canva - 5</span></div>
-                </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Space - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Space - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Space - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Space - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Space - 5</span></div>
-                </div>
-
                 <div class="marquee-box"><div class="marquee-text">Modelo Santa - 350 xats •</div></div>
                 <div class="gif-grid">
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Santa - 1</span></div>
@@ -216,7 +194,25 @@
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Santa - 5</span></div>
                 </div>
             </div>
-            <button class="btn-back" onclick="closeCategory()">VOLTAR</button>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">PCBACK GIF</h2>
+            <div class="content-scroll">
+                <div class="marquee-box"><div class="marquee-text">Exclusivos PCBACK Animated • Premium Collection •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 1</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 2</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/KKY2zqU.gif"></div><span>Pcback - 3</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/fmhynyY.gif"></div><span>Pcback - 4</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/28xDTg0.gif"></div><span>Pcback - 5</span></div>
+                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/9R35WMu.gif"></div><span>Pcback - 6</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
         </div>
     </div>
 </div>
@@ -230,7 +226,7 @@
 
     let currentTrack = 0;
     const audio = new Audio();
-    let volState = 2; // 0: Mute, 1: 50%, 2: 100%
+    let volState = 2;
 
     function loadTrack(index) {
         currentTrack = index;
@@ -274,8 +270,10 @@
         else { audio.volume = 1.0; btn.innerText = "Vol: 100%"; }
     }
 
-    function openCategory() { document.getElementById('main-wrapper').style.transform = 'translateX(-100vw)'; }
-    function closeCategory() { document.getElementById('main-wrapper').style.transform = 'translateX(0)'; }
+    function navigate(pageIndex) {
+        document.getElementById('main-wrapper').style.transform = `translateX(-${pageIndex * 100}vw)`;
+    }
+
     function togglePlayer() {
         const p = document.getElementById('music-player');
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
