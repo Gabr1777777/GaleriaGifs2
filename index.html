@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WRS | Digital Design</title>
     <style>
-        /* ESTILO DO FUNDO ANIMADO ADICIONADO */
+        /* ANIMAÇÕES DE TRANSIÇÃO E GRADIENTE */
         @keyframes splashGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes titleShimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
         :root {
             --neon-blue: #0048FF;
-            --silver-grad: linear-gradient(135deg, #C0C0C0, #808080);
+            --silver-grad: linear-gradient(90deg, #C0C0C0, #fff, #808080, #fff, #C0C0C0);
             --glass-bg: rgba(0, 0, 0, 0.3); 
             --glass-border: rgba(255, 255, 255, 0.08);
-            --anim-speed: 0.6s;
+            --anim-speed: 0.8s; /* Transição levemente mais suave */
         }
 
         body, html {
@@ -39,7 +44,6 @@
             z-index: -2;
         }
 
-        /* TELA DE ENTRADA ATUALIZADA COM GRADIENTE AZUL */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
@@ -47,7 +51,15 @@
             background-size: 400% 400%;
             animation: splashGradient 8s ease infinite;
             z-index: 100;
-            transition: opacity var(--anim-speed) ease;
+            transition: all var(--anim-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* EFEITO DE SAÍDA SUAVE */
+        .loaded #splash-screen { 
+            opacity: 0; 
+            visibility: hidden; 
+            transform: scale(1.1); 
+            filter: blur(10px);
         }
 
         .btn-enter {
@@ -72,6 +84,16 @@
             background: var(--glass-bg); backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border); border-radius: 20px;
             padding: 20px; text-align: center; display: flex; flex-direction: column;
+        }
+
+        /* TÍTULO GALERIA ANIMADO */
+        .main-title {
+            background: var(--silver-grad);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShimmer 3s linear infinite;
+            letter-spacing: 3px; font-weight: 900; margin: 0; font-size: 1.5rem;
         }
 
         .content-scroll {
@@ -154,8 +176,6 @@
             border-radius: 12px; display: none; flex-shrink: 0;
         }
         .p-btn { background: none; border: 1px solid #fff; color: #fff; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; margin: 0 2px; }
-
-        .loaded #splash-screen { opacity: 0; visibility: hidden; }
     </style>
 </head>
 <body>
@@ -167,7 +187,7 @@
 <div class="wrapper" id="main-wrapper">
     <div class="page">
         <div class="container">
-            <h1 style="background: var(--silver-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px; font-weight: 900; margin: 0; font-size: 1.5rem;">GALERIA</h1>
+            <h1 class="main-title">GALERIA</h1>
             <span style="font-size: 0.6rem; color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold;">ID: 1777777</span>
             <div class="content-scroll gallery-grid">
                 <div class="item" onclick="navigate(1)"><strong>GIFS</strong><span>Galeria</span></div>
