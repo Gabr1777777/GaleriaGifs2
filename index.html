@@ -44,7 +44,7 @@
 
         @keyframes gradientMove { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
 
-        /* CONTAINER PRINCIPAL */
+        /* CONTAINER DE TRANSIÇÃO (PÁGINAS) */
         .wrapper {
             display: flex; width: 200vw; height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
@@ -53,65 +53,98 @@
         .page {
             width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center;
-            overflow-y: auto; padding: 40px 0;
         }
 
         .container {
-            width: 90%; max-width: 480px;
+            width: 90%; max-width: 480px; height: 90vh;
             background: var(--glass-bg); backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border); border-radius: 24px;
-            padding: 35px 25px; text-align: center;
+            padding: 20px; text-align: center; display: flex; flex-direction: column;
         }
 
-        /* GRID DE BOTÕES */
-        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        /* Área de conteúdo rolável na container */
+        .content-scroll {
+            overflow-y: auto; flex-grow: 1; padding-right: 5px;
+            scrollbar-width: thin; scrollbar-color: var(--neon-blue) rgba(255,255,255,0.05);
+        }
+        .content-scroll::-webkit-scrollbar { width: 5px; }
+        .content-scroll::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 5px; }
+
+        /* GRID PRINCIPAL */
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: auto; margin-bottom: auto;}
         .item {
             background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
             border-radius: 12px; padding: 18px 10px; transition: 0.3s; cursor: pointer;
         }
         .item:hover { border-color: var(--neon-blue); transform: translateY(-3px); background: rgba(0, 72, 255, 0.05); }
 
-        /* EFEITO LETREIRO (MARQUEE) */
+        /* MARQUEE (LETREIRO) */
         .marquee-box {
-            background: rgba(0, 72, 255, 0.1);
+            background: rgba(0, 72, 255, 0.15);
             border-top: 1px solid var(--neon-blue);
             border-bottom: 1px solid var(--neon-blue);
-            padding: 8px 0; margin: 25px 0 15px 0;
-            overflow: hidden; white-space: nowrap;
+            padding: 8px 0; margin: 20px 0 15px 0;
+            overflow: hidden; white-space: nowrap; flex-shrink: 0;
         }
 
         .marquee-text {
             display: inline-block;
-            padding-left: 100%;
             animation: marquee 10s linear infinite;
             font-size: 0.8rem; font-weight: bold; color: #fff;
             text-transform: uppercase; letter-spacing: 2px;
         }
 
         @keyframes marquee {
-            0% { transform: translate(0, 0); }
+            0% { transform: translate(100%, 0); }
             100% { transform: translate(-100%, 0); }
         }
 
-        /* LISTA DE GIFS */
-        .gif-list {
-            display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;
+        /* EXIBIÇÃO DAS GIFS */
+        .gif-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 25px;
         }
-        .gif-item {
-            font-size: 0.75rem; color: #aaa; background: rgba(255,255,255,0.02);
-            padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);
-            text-align: left; transition: 0.3s;
+
+        .gif-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 8px;
+            transition: 0.3s;
         }
-        .gif-item:hover { color: var(--neon-blue); background: rgba(0, 72, 255, 0.05); }
+
+        .gif-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            display: block;
+        }
+
+        .gif-card span {
+            display: block;
+            font-size: 0.6rem;
+            color: #777;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
 
         .btn-back {
             background: none; border: 1px solid #444; color: #fff;
-            padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 20px;
+            padding: 10px 25px; border-radius: 8px; cursor: pointer; margin-top: auto; margin-bottom: 10px;
+            transition: 0.3s; flex-shrink: 0;
         }
+        .btn-back:hover { background: #fff; color: #000; }
 
         /* PLAYER */
-        #music-player { margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 15px; display: none; }
-        
+        #music-player { 
+            margin-top: 10px; padding: 10px; 
+            background: rgba(0, 72, 255, 0.08); border: 1px solid var(--glass-border);
+            border-radius: 15px; display: none; flex-shrink: 0;
+        }
+        .p-btn { background: none; border: 1px solid #fff; color: #fff; padding: 3px 8px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; margin: 0 3px; }
+
         .loaded #splash-screen { opacity: 0; visibility: hidden; }
     </style>
 </head>
@@ -126,75 +159,72 @@
 <div class="wrapper" id="main-wrapper">
     <div class="page">
         <div class="container">
-            <h1 style="background: var(--silver-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px;">WRS DESIGN</h1>
-            <span style="font-size: 0.65rem; color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 30px; display: block;">ID: GABR (1777777)</span>
+            <h1 style="background: var(--silver-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px; font-weight: 900; margin-top: 0;">WRS DESIGN</h1>
+            <span style="font-size: 0.65rem; color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 20px; display: block; font-weight: bold;">ID: 1777777</span>
 
-            <div class="gallery-grid">
-                <div class="item" onclick="openCategory()"><strong>GIFS</strong><span>Library</span></div>
+            <div class="content-scroll gallery-grid">
+                <div class="item" onclick="openCategory()"><strong>GIFS</strong><span>Galeria</span></div>
                 <div class="item"><strong>PCBACK GIF</strong><span>Animated</span></div>
                 <div class="item"><strong>PSTYLE GIF</strong><span>Premium</span></div>
-                <div class="item"><strong>FUNDOS</strong><span>Wallpapers</span></div>
+                <div class="item"><strong>FUNDOS</strong><span>Wallpaper</span></div>
                 <div class="item"><strong>PSTYLE ESTÁTICO</strong><span>Classic</span></div>
                 <div class="item"><strong>PCBACK ESTÁTICO</strong><span>Desktop</span></div>
-                <div class="item" style="grid-column: span 2;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
             </div>
 
+            <div class="item" style="margin-top: 10px; flex-shrink: 0;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
+
             <div id="music-player">
-                <div id="current-song" style="font-size: 0.7rem; color: var(--neon-blue); margin-bottom: 10px;">---</div>
-                <button onclick="playPause()" id="play-btn" style="background: none; border: 1px solid #fff; color: white; padding: 5px 15px; border-radius: 5px; cursor: pointer;">Play</button>
+                <div id="current-song" style="font-size: 0.7rem; color: var(--neon-blue); margin-bottom: 8px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">---</div>
+                <button class="p-btn" onclick="prevSong()">❮</button>
+                <button class="p-btn" id="play-btn" onclick="playPause()">Pause</button>
+                <button class="p-btn" onclick="nextSong()">❯</button>
             </div>
         </div>
     </div>
 
     <div class="page">
         <div class="container">
-            <h2 style="font-size: 1.2rem; color: #fff;">GALERIA DE GIFS</h2>
+            <h2 style="font-size: 1rem; color: #fff; letter-spacing: 2px; margin-top: 0;">MODELOS DISPONÍVEIS</h2>
 
-            <div class="marquee-box">
-                <div class="marquee-text">Modelos AfterEffects - 400 xats • Modelos AfterEffects - 400 xats •</div>
-            </div>
-            <div class="gif-list">
-                <div class="gif-item">After - 1 kv1EWDW.gif</div>
-                <div class="gif-item">After - 2 FIulKIF.gif</div>
-                <div class="gif-item">After - 3 (Modelo Disponível)</div>
-                <div class="gif-item">After - 4 qLhMZAE.gif</div>
-                <div class="gif-item">After - 5 R9nl6Ch.gif</div>
-            </div>
+            <div class="content-scroll">
+                <div class="marquee-box"><div class="marquee-text">Modelos AfterEffects - 400 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"><span>After - 1</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"><span>After - 2</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"><span>After - 3</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"><span>After - 4</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"><span>After - 5</span></div>
+                </div>
 
-            <div class="marquee-box">
-                <div class="marquee-text">Modelos Blufftiler - 350 xats • Modelos Blufftiler - 350 xats •</div>
-            </div>
-            <div class="gif-list">
-                <div class="gif-item">Bluff - 1 kv1EWDW.gif</div>
-                <div class="gif-item">Bluff - 2 FIulKIF.gif</div>
-                <div class="gif-item">Bluff - 3 (Modelo Disponível)</div>
-                <div class="gif-item">Bluff - 4 qLhMZAE.gif</div>
-                <div class="gif-item">Bluff - 5 R9nl6Ch.gif</div>
-            </div>
+                <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"><span>Bluff - 1</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"><span>Bluff - 2</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"><span>Bluff - 3</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"><span>Bluff - 4</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"><span>Bluff - 5</span></div>
+                </div>
 
-            <div class="marquee-box">
-                <div class="marquee-text">Modelos Canva - 350 xats • Modelos Canva - 350 xats •</div>
-            </div>
-            <div class="gif-list">
-                <div class="gif-item">Canva - 1 kv1EWDW.gif</div>
-                <div class="gif-item">Canva - 2 FIulKIF.gif</div>
-                <div class="gif-item">Canva - 3 (Modelo Disponível)</div>
-                <div class="gif-item">Canva - 4 qLhMZAE.gif</div>
-                <div class="gif-item">Canva - 5 R9nl6Ch.gif</div>
-            </div>
+                <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"><span>Canva - 1</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"><span>Canva - 2</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"><span>Canva - 3</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"><span>Canva - 4</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"><span>Canva - 5</span></div>
+                </div>
 
-            <div class="marquee-box">
-                <div class="marquee-text">Modelos PhotoSpace - 350 xats • Modelos PhotoSpace - 350 xats •</div>
-            </div>
-            <div class="gif-list">
-                <div class="gif-item">Space - 1 kv1EWDW.gif</div>
-                <div class="gif-item">Space - 2 FIulKIF.gif</div>
-                <div class="gif-item">Space - 3 (Modelo Disponível)</div>
-                <div class="gif-item">Space - 4 qLhMZAE.gif</div>
-                <div class="gif-item">Space - 5 R9nl6Ch.gif</div>
+                <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card"><img src="https://i.imgur.com/kv1EWDW.gif"><span>Space - 1</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/FIulKIF.gif"><span>Space - 2</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/qLhMZAE.gif"><span>Space - 3</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/R9nl6Ch.gif"><span>Space - 4</span></div>
+                    <div class="gif-card"><img src="https://i.imgur.com/uCXDGTg.gif"><span>Space - 5</span></div>
+                </div>
             </div>
 
-            <button class="btn-back" onclick="closeCategory()">❮ Voltar ao Menu</button>
+            <button class="btn-back" onclick="closeCategory()">VOLTAR</button>
         </div>
     </div>
 </div>
@@ -202,28 +232,55 @@
 <script>
     const playlist = [
         { name: "Eminem - You dont know", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
-        { name: "The Sound of Silence", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
+        { name: "The Sound of Silence – Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
         { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=0yenl8sh&raw=1" }
     ];
 
-    let audio = new Audio();
-    function enterGallery() { document.body.classList.add('loaded'); }
-    function openCategory() { document.getElementById('main-wrapper').style.transform = 'translateX(-100vw)'; }
-    function closeCategory() { document.getElementById('main-wrapper').style.transform = 'translateX(0)'; }
+    let currentTrack = 0;
+    const audio = new Audio();
+    let playerOpen = false;
 
-    function togglePlayer() {
-        const p = document.getElementById('music-player');
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
-        if(!audio.src) {
-            audio.src = playlist[0].url;
-            document.getElementById('current-song').innerText = playlist[0].name;
-        }
+    function loadTrack(index) {
+        currentTrack = index;
+        audio.src = playlist[index].url;
+        document.getElementById('current-song').innerText = playlist[index].name;
+    }
+
+    function enterGallery() {
+        document.body.classList.add('loaded');
+        loadTrack(0);
+        audio.play().catch(e => {
+            console.log("Autoplay blocked. User interaction needed.");
+            document.getElementById('play-btn').innerText = "Play";
+        });
+    }
+
+    audio.onended = function() { nextSong(); };
+
+    function nextSong() {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        loadTrack(currentTrack);
+        audio.play().then(() => { document.getElementById('play-btn').innerText = "Pause"; });
+    }
+
+    function prevSong() {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrack);
+        audio.play().then(() => { document.getElementById('play-btn').innerText = "Pause"; });
     }
 
     function playPause() {
         const btn = document.getElementById('play-btn');
-        if(audio.paused) { audio.play(); btn.innerText = "Pause"; }
+        if (audio.paused) { audio.play(); btn.innerText = "Pause"; }
         else { audio.pause(); btn.innerText = "Play"; }
+    }
+
+    function openCategory() { document.getElementById('main-wrapper').style.transform = 'translateX(-100vw)'; }
+    function closeCategory() { document.getElementById('main-wrapper').style.transform = 'translateX(0)'; }
+    function togglePlayer() {
+        const p = document.getElementById('music-player');
+        playerOpen = !playerOpen;
+        p.style.display = playerOpen ? 'block' : 'none';
     }
 
     document.addEventListener('contextmenu', e => e.preventDefault());
