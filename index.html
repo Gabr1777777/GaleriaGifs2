@@ -44,7 +44,7 @@
         @keyframes gradientMove { 0% {background-position:0% 50%} 50% {background-position:100% 50%} 100% {background-position:0% 50%} }
 
         .wrapper {
-            display: flex; width: 300vw; height: 100vh;
+            display: flex; width: 600vw; height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
@@ -90,7 +90,6 @@
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* GALERIA PEQUENA */
         .gif-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
         .gif-card { width: 80px; text-align: center; transition: 0.3s; }
         .gif-img-box {
@@ -103,7 +102,6 @@
         .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; display: block; }
 
-        /* PCBACKS */
         .pcback-list { display: flex; flex-direction: column; gap: 20px; align-items: center; }
         .pcback-card { width: 100%; max-width: 320px; text-align: center; }
         .pcback-img-box {
@@ -115,7 +113,6 @@
         .pcback-img-box img { width: 100%; height: auto; display: block; }
         .pcback-card span { font-size: 0.7rem; color: #fff; font-weight: bold; text-transform: uppercase; }
 
-        /* EFEITO ZOOM (MODAL) */
         #zoom-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); display: none; justify-content: center;
@@ -162,10 +159,10 @@
             <div class="content-scroll gallery-grid">
                 <div class="item" onclick="navigate(1)"><strong>GIFS</strong><span>Galeria</span></div>
                 <div class="item" onclick="navigate(2)"><strong>PCBACK GIF</strong><span>Animated</span></div>
-                <div class="item"><strong>PSTYLE GIF</strong><span>Premium</span></div>
-                <div class="item"><strong>FUNDOS</strong><span>Wallpaper</span></div>
-                <div class="item"><strong>PSTYLE ESTÁTICO</strong><span>Classic</span></div>
-                <div class="item"><strong>PCBACK ESTÁTICO</strong><span>Desktop</span></div>
+                <div class="item" onclick="navigate(3)"><strong>PSTYLE GIF</strong><span>Premium</span></div>
+                <div class="item" onclick="navigate(4)"><strong>FUNDOS</strong><span>Wallpaper</span></div>
+                <div class="item" onclick="navigate(5)"><strong>PSTYLE ESTÁTICO</strong><span>Classic</span></div>
+                <div class="item" onclick="navigate(6)"><strong>PCBACK ESTÁTICO</strong><span>Desktop</span></div>
             </div>
 
             <div class="item" style="margin-top: 10px; flex-shrink: 0;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
@@ -184,7 +181,6 @@
         <div class="container">
             <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">GALERIA DE GIFS</h2>
             <div class="content-scroll">
-                
                 <div class="marquee-box"><div class="marquee-text">Modelos AfterEffects - 400 xats •</div></div>
                 <div class="gif-grid">
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>After - 1</span></div>
@@ -193,7 +189,6 @@
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After - 4</span></div>
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After - 5</span></div>
                 </div>
-
                 <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
                 <div class="gif-grid">
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff - 1</span></div>
@@ -202,34 +197,7 @@
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff - 4</span></div>
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff - 5</span></div>
                 </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Canva - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Canva - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Canva - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Canva - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Canva - 5</span></div>
                 </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Space - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Space - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Space - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Space - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Space - 5</span></div>
-                </div>
-
-                <div class="marquee-box"><div class="marquee-text">Modelo Santa - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Santa - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Santa - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Santa - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Santa - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Santa - 5</span></div>
-                </div>
-            </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
         </div>
     </div>
@@ -245,6 +213,73 @@
                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/fmhynyY.gif"></div><span>Pcback - 3</span></div>
                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/28xDTg0.gif"></div><span>Pcback - 4</span></div>
                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/9R35WMu.gif"></div><span>Pcback - 5</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">PSTYLE GIF</h2>
+            <div class="content-scroll">
+                <div class="marquee-box"><div class="marquee-text">PStyle Animated Premium •</div></div>
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/rUIzfWU.gif"></div><span>Pstyle - 1</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/dGfJDfh.gif"></div><span>Pstyle - 2</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/ZXBA6F1.gif"></div><span>Pstyle - 3</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/dImC226.gif"></div><span>Pstyle - 4</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/4P6kTS6.gif"></div><span>Pstyle - 5</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">FUNDOS</h2>
+            <div class="content-scroll">
+                <div class="marquee-box"><div class="marquee-text">Wallpapers Exclusivos •</div></div>
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/eJtGG3D.png"></div><span>Fundo - 1</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/Q8XwtQZ.png"></div><span>Fundo - 2</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/6phSrhR.png"></div><span>Fundo - 3</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/yeQZf5S.png"></div><span>Fundo - 4</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/zQj5X8P.png"></div><span>Fundo - 5</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/OojsaCj.png"></div><span>Fundo - 6</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">PSTYLE ESTÁTICO</h2>
+            <div class="content-scroll">
+                <div class="marquee-box"><div class="marquee-text">Modelos Classic PStyle •</div></div>
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/zlcL7Dh.png"></div><span>Classic - 1</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/Ii4pk4g.png"></div><span>Classic - 2</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/m2Ew85b.png"></div><span>Classic - 3</span></div>
+                </div>
+            </div>
+            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="container">
+            <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">PCBACK ESTÁTICO</h2>
+            <div class="content-scroll">
+                <div class="marquee-box"><div class="marquee-text">Desktop Wallpapers •</div></div>
+                <div class="pcback-list">
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/OyX4Jwt.png"></div><span>Desktop - 1</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/tcGR4ey.png"></div><span>Desktop - 2</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/uBp1ypU.png"></div><span>Desktop - 3</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/QtSYA09.png"></div><span>Desktop - 4</span></div>
+                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/5iJRrrF.png"></div><span>Desktop - 5</span></div>
                 </div>
             </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
@@ -314,7 +349,6 @@
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
     }
 
-    // ZOOM FUNCTIONS
     function openZoom(element) {
         const imgSrc = element.querySelector('img').src;
         document.getElementById('zoomed-img').src = imgSrc;
