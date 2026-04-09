@@ -66,7 +66,6 @@
 
         .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         
-        /* Estilo base dos itens da Home */
         .item {
             background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
             border-radius: 10px; padding: 12px 8px; transition: 0.3s; cursor: pointer;
@@ -92,52 +91,38 @@
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* Efeito de passar o mouse na Galeria de GIFs (Pequenos) */
+        /* HOVER NOS GIFS PEQUENOS */
         .gif-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
         .gif-card { width: 80px; text-align: center; cursor: pointer; }
         .gif-img-box {
             background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
             border-radius: 8px; width: 80px; height: 80px;
             display: flex; align-items: center; justify-content: center;
-            overflow: hidden; margin-bottom: 4px;
-            transition: all 0.3s ease; /* Transição suave */
+            overflow: hidden; margin-bottom: 4px; transition: all 0.3s ease;
         }
         .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; display: block; }
 
-        /* Gatilho do Hover nos GIFs pequenos */
         .gif-card:hover .gif-img-box {
-            border-color: var(--neon-blue);
-            transform: scale(1.1);
-            box-shadow: 0 0 15px var(--neon-blue);
-            background: rgba(0, 72, 255, 0.1);
+            border-color: var(--neon-blue); transform: scale(1.1);
+            box-shadow: 0 0 15px var(--neon-blue); background: rgba(0, 72, 255, 0.1);
         }
 
-        /* Efeito de passar o mouse nas Listas de PCBACK/PSTYLE (Grandes) */
+        /* HOVER NAS IMAGENS GRANDES */
         .pcback-list { display: flex; flex-direction: column; gap: 20px; align-items: center; }
-        .pcback-card { width: 100%; max-width: 320px; text-align: center; }
+        .pcback-card { width: 100%; max-width: 320px; text-align: center; cursor: pointer; }
         .pcback-img-box {
             background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
             border-radius: 12px; width: 100%; overflow: hidden; margin-bottom: 8px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            cursor: zoom-in;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .pcback-img-box img { width: 100%; height: auto; display: block; }
-        .pcback-card span { font-size: 0.7rem; color: #fff; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
-
-        /* Gatilho do Hover nas imagens grandes */
-        .pcback-card:hover .pcback-img-box {
-            border-color: var(--neon-blue);
-            transform: scale(1.03);
-            box-shadow: 0 0 25px var(--neon-blue);
-        }
-        .pcback-card:hover span { color: var(--neon-blue); }
+        .pcback-card:hover .pcback-img-box { border-color: var(--neon-blue); transform: scale(1.03); box-shadow: 0 0 25px var(--neon-blue); }
 
         #zoom-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); display: none; justify-content: center;
-            align-items: center; z-index: 1000; cursor: zoom-out;
-            backdrop-filter: blur(10px);
+            align-items: center; z-index: 1000; cursor: zoom-out; backdrop-filter: blur(10px);
         }
         #zoom-overlay img { max-width: 90%; max-height: 90%; border-radius: 15px; border: 2px solid var(--neon-blue); box-shadow: 0 0 30px var(--neon-blue); }
 
@@ -161,21 +146,14 @@
 <body>
 
 <div class="bg-glow"></div>
-
-<div id="zoom-overlay" onclick="closeZoom()">
-    <img id="zoomed-img" src="">
-</div>
-
-<div id="splash-screen">
-    <button class="btn-enter" onclick="enterGallery()">Entrar</button>
-</div>
+<div id="zoom-overlay" onclick="closeZoom()"><img id="zoomed-img" src=""></div>
+<div id="splash-screen"><button class="btn-enter" onclick="enterGallery()">Entrar</button></div>
 
 <div class="wrapper" id="main-wrapper">
     <div class="page">
         <div class="container">
             <h1 style="background: var(--silver-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px; font-weight: 900; margin: 0; font-size: 1.5rem;">WRS DESIGN</h1>
             <span style="font-size: 0.6rem; color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold;">ID: 1777777</span>
-
             <div class="content-scroll gallery-grid">
                 <div class="item" onclick="navigate(1)"><strong>GIFS</strong><span>Galeria</span></div>
                 <div class="item" onclick="navigate(2)"><strong>PCBACK GIF</strong><span>Animated</span></div>
@@ -184,11 +162,9 @@
                 <div class="item" onclick="navigate(5)"><strong>PSTYLE ESTÁTICO</strong><span>Classic</span></div>
                 <div class="item" onclick="navigate(6)"><strong>PCBACK ESTÁTICO</strong><span>Desktop</span></div>
             </div>
-
-            <div class="item" style="margin-top: 10px; flex-shrink: 0;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
-
+            <div class="item" style="margin-top: 10px;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
             <div id="music-player">
-                <div id="current-song" style="font-size: 0.65rem; color: var(--neon-blue); margin-bottom: 8px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">---</div>
+                <div id="current-song" style="font-size: 0.65rem; color: var(--neon-blue); margin-bottom: 8px; font-weight: bold;">---</div>
                 <button class="p-btn" onclick="prevSong()">❮</button>
                 <button class="p-btn" id="play-btn" onclick="playPause()">Pause</button>
                 <button class="p-btn" onclick="nextSong()">❯</button>
@@ -209,6 +185,7 @@
                     <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After-4</span></div>
                     <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After-5</span></div>
                 </div>
+
                 <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
                 <div class="gif-grid">
                     <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff-1</span></div>
@@ -216,6 +193,24 @@
                     <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff-3</span></div>
                     <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff-4</span></div>
                     <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff-5</span></div>
+                </div>
+
+                <div class="marquee-box"><div class="marquee-text">Modelos Canva - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Canva-1</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Canva-2</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Canva-3</span></div>
+                </div>
+
+                <div class="marquee-box"><div class="marquee-text">Modelos PhotoSpace - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Space-1</span></div>
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Space-2</span></div>
+                </div>
+
+                <div class="marquee-box"><div class="marquee-text">Modelo Santa - 350 xats •</div></div>
+                <div class="gif-grid">
+                    <div class="gif-card" onclick="openZoom(this)"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Santa-1</span></div>
                 </div>
             </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
@@ -229,78 +224,12 @@
                 <div class="pcback-list">
                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 1</span></div>
                     <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/KKY2zqU.gif"></div><span>Pcback - 2</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/fmhynyY.gif"></div><span>Pcback - 3</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/28xDTg0.gif"></div><span>Pcback - 4</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/9R35WMu.gif"></div><span>Pcback - 5</span></div>
                 </div>
             </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
         </div>
     </div>
-
-    <div class="page">
-        <div class="container">
-            <h2 style="font-size: 0.9rem;">PSTYLE GIF</h2>
-            <div class="content-scroll">
-                <div class="pcback-list">
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/rUIzfWU.gif"></div><span>Pstyle - 1</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/dGfJDfh.gif"></div><span>Pstyle - 2</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/ZXBA6F1.gif"></div><span>Pstyle - 3</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/dImC226.gif"></div><span>Pstyle - 4</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/4P6kTS6.gif"></div><span>Pstyle - 5</span></div>
-                </div>
-            </div>
-            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
-        </div>
     </div>
-
-    <div class="page">
-        <div class="container">
-            <h2 style="font-size: 0.9rem;">FUNDOS</h2>
-            <div class="content-scroll">
-                <div class="pcback-list">
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/eJtGG3D.png"></div><span>Fundo - 1</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/Q8XwtQZ.png"></div><span>Fundo - 2</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/6phSrhR.png"></div><span>Fundo - 3</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/yeQZf5S.png"></div><span>Fundo - 4</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/zQj5X8P.png"></div><span>Fundo - 5</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/OojsaCj.png"></div><span>Fundo - 6</span></div>
-                </div>
-            </div>
-            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
-        </div>
-    </div>
-
-    <div class="page">
-        <div class="container">
-            <h2 style="font-size: 0.9rem;">PSTYLE ESTÁTICO</h2>
-            <div class="content-scroll">
-                <div class="pcback-list">
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/zlcL7Dh.png"></div><span>Classic - 1</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/Ii4pk4g.png"></div><span>Classic - 2</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/m2Ew85b.png"></div><span>Classic - 3</span></div>
-                </div>
-            </div>
-            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
-        </div>
-    </div>
-
-    <div class="page">
-        <div class="container">
-            <h2 style="font-size: 0.9rem;">PCBACK ESTÁTICO</h2>
-            <div class="content-scroll">
-                <div class="pcback-list">
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/OyX4Jwt.png"></div><span>Desktop - 1</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/tcGR4ey.png"></div><span>Desktop - 2</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/uBp1ypU.png"></div><span>Desktop - 3</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/QtSYA09.png"></div><span>Desktop - 4</span></div>
-                    <div class="pcback-card" onclick="openZoom(this)"><div class="pcback-img-box"><img src="https://i.imgur.com/5iJRrrF.png"></div><span>Desktop - 5</span></div>
-                </div>
-            </div>
-            <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
-        </div>
-    </div>
-</div>
 
 <script>
     const playlist = [
@@ -309,76 +238,19 @@
         { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=0yenl8sh&raw=1" }
     ];
 
-    let currentTrack = 0;
-    const audio = new Audio();
-    let volState = 2;
-
-    function loadTrack(index) {
-        currentTrack = index;
-        audio.src = playlist[index].url;
-        document.getElementById('current-song').innerText = playlist[index].name;
-    }
-
-    function enterGallery() {
-        document.body.classList.add('loaded');
-        loadTrack(0);
-        audio.play().catch(() => { document.getElementById('play-btn').innerText = "Play"; });
-    }
-
+    let currentTrack = 0; const audio = new Audio(); let volState = 2;
+    function loadTrack(i) { currentTrack = i; audio.src = playlist[i].url; document.getElementById('current-song').innerText = playlist[i].name; }
+    function enterGallery() { document.body.classList.add('loaded'); loadTrack(0); audio.play().catch(()=>{}); }
     audio.onended = function() { nextSong(); };
-
-    function nextSong() {
-        currentTrack = (currentTrack + 1) % playlist.length;
-        loadTrack(currentTrack);
-        audio.play();
-        document.getElementById('play-btn').innerText = "Pause";
-    }
-
-    function prevSong() {
-        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-        loadTrack(currentTrack);
-        audio.play();
-        document.getElementById('play-btn').innerText = "Pause";
-    }
-
-    function playPause() {
-        const btn = document.getElementById('play-btn');
-        if (audio.paused) { audio.play(); btn.innerText = "Pause"; }
-        else { audio.pause(); btn.innerText = "Play"; }
-    }
-
-    function toggleVolume() {
-        const btn = document.getElementById('vol-btn');
-        volState = (volState + 1) % 3;
-        if (volState === 0) { audio.volume = 0; btn.innerText = "Mudo"; }
-        else if (volState === 1) { audio.volume = 0.5; btn.innerText = "Vol: 50%"; }
-        else { audio.volume = 1.0; btn.innerText = "Vol: 100%"; }
-    }
-
-    function navigate(index) {
-        document.getElementById('main-wrapper').style.transform = `translateX(-${index * 100}vw)`;
-    }
-
-    function togglePlayer() {
-        const p = document.getElementById('music-player');
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function openZoom(el) {
-        const img = el.querySelector('img');
-        if(img) {
-            document.getElementById('zoomed-img').src = img.src;
-            document.getElementById('zoom-overlay').style.display = 'flex';
-        }
-    }
-
-    function closeZoom() {
-        document.getElementById('zoom-overlay').style.display = 'none';
-        document.getElementById('zoomed-img').src = '';
-    }
-
+    function nextSong() { currentTrack = (currentTrack + 1) % playlist.length; loadTrack(currentTrack); audio.play(); }
+    function prevSong() { currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; loadTrack(currentTrack); audio.play(); }
+    function playPause() { const b = document.getElementById('play-btn'); if (audio.paused) { audio.play(); b.innerText = "Pause"; } else { audio.pause(); b.innerText = "Play"; } }
+    function toggleVolume() { const b = document.getElementById('vol-btn'); volState = (volState + 1) % 3; if (volState === 0) { audio.volume = 0; b.innerText = "Mudo"; } else if (volState === 1) { audio.volume = 0.5; b.innerText = "Vol: 50%"; } else { audio.volume = 1.0; b.innerText = "Vol: 100%"; } }
+    function navigate(i) { document.getElementById('main-wrapper').style.transform = `translateX(-${i * 100}vw)`; }
+    function togglePlayer() { const p = document.getElementById('music-player'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
+    function openZoom(el) { const img = el.querySelector('img'); if(img) { document.getElementById('zoomed-img').src = img.src; document.getElementById('zoom-overlay').style.display = 'flex'; } }
+    function closeZoom() { document.getElementById('zoom-overlay').style.display = 'none'; document.getElementById('zoomed-img').src = ''; }
     document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
-
 </body>
 </html>
