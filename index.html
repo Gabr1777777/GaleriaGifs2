@@ -90,28 +90,30 @@
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
+        /* ESTILO PARA GIFS PEQUENAS (GALERIA NORMAL) */
         .gif-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
-
         .gif-card { width: 80px; text-align: center; transition: 0.3s; }
-
         .gif-img-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            width: 80px; height: 80px;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            border-radius: 8px; width: 80px; height: 80px;
             display: flex; align-items: center; justify-content: center;
-            overflow: hidden; margin-bottom: 4px;
-            transition: all 0.3s ease;
+            overflow: hidden; margin-bottom: 4px; transition: all 0.3s ease;
         }
-
-        .gif-card:hover .gif-img-box {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 15px var(--neon-blue);
-            transform: scale(1.05);
-        }
-
+        .gif-card:hover .gif-img-box { border-color: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); transform: scale(1.05); }
         .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; display: block; }
+
+        /* ESTILO PARA PCBACKS GRANDES (UM EMBAIXO DO OUTRO) */
+        .pcback-list { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        .pcback-card { width: 100%; max-width: 320px; text-align: center; }
+        .pcback-img-box {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            border-radius: 12px; width: 100%; overflow: hidden; margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+        .pcback-card:hover .pcback-img-box { border-color: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue); }
+        .pcback-img-box img { width: 100%; height: auto; display: block; }
+        .pcback-card span { font-size: 0.7rem; color: #fff; font-weight: bold; text-transform: uppercase; }
 
         .btn-back {
             background: none; border: 1px solid #444; color: #fff;
@@ -177,23 +179,7 @@
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>After - 4</span></div>
                     <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>After - 5</span></div>
                 </div>
-                <div class="marquee-box"><div class="marquee-text">Modelos Blufftiler - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Bluff - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Bluff - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Bluff - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Bluff - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Bluff - 5</span></div>
                 </div>
-                <div class="marquee-box"><div class="marquee-text">Modelo Santa - 350 xats •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/kv1EWDW.gif"></div><span>Santa - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/FIulKIF.gif"></div><span>Santa - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/qLhMZAE.gif"></div><span>Santa - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/R9nl6Ch.gif"></div><span>Santa - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/uCXDGTg.gif"></div><span>Santa - 5</span></div>
-                </div>
-            </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
         </div>
     </div>
@@ -202,14 +188,14 @@
         <div class="container">
             <h2 style="font-size: 0.9rem; color: #fff; letter-spacing: 2px; margin: 0;">PCBACK GIF</h2>
             <div class="content-scroll">
-                <div class="marquee-box"><div class="marquee-text">Exclusivos PCBACK Animated • Premium Collection •</div></div>
-                <div class="gif-grid">
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 1</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 2</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/KKY2zqU.gif"></div><span>Pcback - 3</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/fmhynyY.gif"></div><span>Pcback - 4</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/28xDTg0.gif"></div><span>Pcback - 5</span></div>
-                    <div class="gif-card"><div class="gif-img-box"><img src="https://i.imgur.com/9R35WMu.gif"></div><span>Pcback - 6</span></div>
+                <div class="marquee-box"><div class="marquee-text">Premium PCBACK Animated • Alta Qualidade •</div></div>
+                <div class="pcback-list">
+                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 1</span></div>
+                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/SFnk7A6.gif"></div><span>Pcback - 2</span></div>
+                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/KKY2zqU.gif"></div><span>Pcback - 3</span></div>
+                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/fmhynyY.gif"></div><span>Pcback - 4</span></div>
+                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/28xDTg0.gif"></div><span>Pcback - 5</span></div>
+                    <div class="pcback-card"><div class="pcback-img-box"><img src="https://i.imgur.com/9R35WMu.gif"></div><span>Pcback - 6</span></div>
                 </div>
             </div>
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
