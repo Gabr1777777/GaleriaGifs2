@@ -39,8 +39,7 @@
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
-            background: linear-gradient(135deg, #001a4d 0%, #0048FF 100%); 
-            z-index: 100;
+            background: #050505; z-index: 100;
             transition: opacity var(--anim-speed) ease;
         }
 
@@ -63,30 +62,30 @@
 
         .container {
             width: 85%; max-width: 420px; height: 85vh;
-            background: var(--glass-bg); 
-            /* Reduzi o blur para o GIF aparecer melhor */
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px);
+            background: var(--glass-bg); backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border); border-radius: 20px;
             padding: 20px; text-align: center; display: flex; flex-direction: column;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         .content-scroll {
             overflow-y: auto; flex-grow: 1; padding: 10px 5px;
             scrollbar-width: thin; scrollbar-color: var(--neon-blue) transparent;
         }
+        .content-scroll::-webkit-scrollbar { width: 4px; }
+        .content-scroll::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
 
         .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         
         .item {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
             border-radius: 10px; padding: 12px 8px; transition: 0.3s; cursor: pointer;
         }
-        .item:hover { border-color: var(--neon-blue); transform: translateY(-2px); background: rgba(0, 72, 255, 0.1); }
+        .item:hover { border-color: var(--neon-blue); transform: translateY(-2px); background: rgba(0, 72, 255, 0.05); box-shadow: 0 0 15px rgba(0, 72, 255, 0.2); }
+        .item strong { font-size: 0.75rem; display: block; }
+        .item span { font-size: 0.6rem; color: #666; }
 
         .marquee-box {
-            background: rgba(0, 72, 255, 0.15);
+            background: rgba(0, 72, 255, 0.12);
             border-top: 1px solid var(--neon-blue);
             border-bottom: 1px solid var(--neon-blue);
             padding: 5px 0; margin: 15px 0 10px 0;
@@ -102,30 +101,38 @@
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
-        .gif-card { width: 80px; text-align: center; cursor: pointer; margin: 5px; }
+        .gif-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px; }
+        .gif-card { width: 80px; text-align: center; cursor: pointer; }
         .gif-img-box {
             background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
             border-radius: 8px; width: 80px; height: 80px;
             display: flex; align-items: center; justify-content: center;
-            overflow: hidden; transition: 0.3s;
+            overflow: hidden; margin-bottom: 4px; transition: all 0.3s ease;
         }
         .gif-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .gif-card span { font-size: 0.55rem; color: #aaa; text-transform: uppercase; display: block; }
+
+        .gif-card:hover .gif-img-box {
+            border-color: var(--neon-blue); transform: scale(1.1);
+            box-shadow: 0 0 15px var(--neon-blue); background: rgba(0, 72, 255, 0.1);
+        }
 
         .pcback-list { display: flex; flex-direction: column; gap: 20px; align-items: center; }
         .pcback-card { width: 100%; max-width: 320px; text-align: center; cursor: pointer; }
         .pcback-img-box {
             background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
             border-radius: 12px; width: 100%; overflow: hidden; margin-bottom: 8px;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .pcback-img-box img { width: 100%; height: auto; display: block; }
+        .pcback-card:hover .pcback-img-box { border-color: var(--neon-blue); transform: scale(1.05); box-shadow: 0 0 25px var(--neon-blue); }
 
         #zoom-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); display: none; justify-content: center;
             align-items: center; z-index: 1000; cursor: zoom-out; backdrop-filter: blur(10px);
         }
-        #zoom-overlay img { max-width: 90%; max-height: 90%; border-radius: 15px; border: 2px solid var(--neon-blue); }
+        #zoom-overlay img { max-width: 90%; max-height: 90%; border-radius: 15px; border: 2px solid var(--neon-blue); box-shadow: 0 0 30px var(--neon-blue); }
 
         .btn-back {
             background: none; border: 1px solid #444; color: #fff;
@@ -136,17 +143,15 @@
 
         #music-player { 
             margin-top: 10px; padding: 10px; 
-            background: rgba(0, 72, 255, 0.1); border: 1px solid var(--glass-border);
+            background: rgba(0, 72, 255, 0.08); border: 1px solid var(--glass-border);
             border-radius: 12px; display: none; flex-shrink: 0;
         }
-        .p-btn { background: none; border: 1px solid #fff; color: #fff; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; }
+        .p-btn { background: none; border: 1px solid #fff; color: #fff; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; margin: 0 2px; }
 
         .loaded #splash-screen { opacity: 0; visibility: hidden; }
     </style>
 </head>
 <body>
-
-<div class="bg-glow"></div>
 
 <div class="bg-glow"></div>
 <div id="zoom-overlay" onclick="closeZoom()"><img id="zoomed-img" src=""></div>
@@ -290,23 +295,25 @@
     </div>
 </div>
 
-
 <script>
     const playlist = [
         { name: "Eminem - You dont know", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
-        { name: "The Sound of Silence", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" }
+        { name: "The Sound of Silence – Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
+        { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=0yenl8sh&raw=1" }
     ];
 
-    let currentTrack = 0; const audio = new Audio();
+    let currentTrack = 0; const audio = new Audio(); let volState = 2;
     function loadTrack(i) { currentTrack = i; audio.src = playlist[i].url; document.getElementById('current-song').innerText = playlist[i].name; }
     function enterGallery() { document.body.classList.add('loaded'); loadTrack(0); audio.play().catch(()=>{}); }
+    audio.onended = function() { nextSong(); };
     function nextSong() { currentTrack = (currentTrack + 1) % playlist.length; loadTrack(currentTrack); audio.play(); }
     function prevSong() { currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; loadTrack(currentTrack); audio.play(); }
     function playPause() { const b = document.getElementById('play-btn'); if (audio.paused) { audio.play(); b.innerText = "Pause"; } else { audio.pause(); b.innerText = "Play"; } }
+    function toggleVolume() { const b = document.getElementById('vol-btn'); volState = (volState + 1) % 3; if (volState === 0) { audio.volume = 0; b.innerText = "Mudo"; } else if (volState === 1) { audio.volume = 0.5; b.innerText = "Vol: 50%"; } else { audio.volume = 1.0; b.innerText = "Vol: 100%"; } }
     function navigate(i) { document.getElementById('main-wrapper').style.transform = `translateX(-${i * 100}vw)`; }
     function togglePlayer() { const p = document.getElementById('music-player'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
     function openZoom(el) { const img = el.querySelector('img'); if(img) { document.getElementById('zoomed-img').src = img.src; document.getElementById('zoom-overlay').style.display = 'flex'; } }
-    function closeZoom() { document.getElementById('zoom-overlay').style.display = 'none'; }
+    function closeZoom() { document.getElementById('zoom-overlay').style.display = 'none'; document.getElementById('zoomed-img').src = ''; }
     document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
 </body>
