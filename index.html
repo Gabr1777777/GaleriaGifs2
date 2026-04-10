@@ -240,6 +240,27 @@
             border-radius: 12px; display: none; flex-shrink: 0;
         }
         .p-btn { background: none; border: 1px solid #fff; color: #fff; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; margin: 0 2px; }
+
+        /* ESTILO DO RODAPÉ ANIMADO */
+        .footer-credits {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 90;
+        }
+
+        .footer-text {
+            background: var(--silver-grad);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShimmer 3s linear infinite;
+            font-size: 0.7rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -392,6 +413,10 @@
             <button class="btn-back" onclick="navigate(0)">VOLTAR</button>
         </div>
     </div>
+</div>
+
+<div class="footer-credits">
+    <span class="footer-text">Galeria Exclusiva 2026 - By: Designer Gabr (1777777)</span>
 </div>
 
 <script>
