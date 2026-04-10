@@ -227,19 +227,25 @@
         }
         #zoom-overlay img { max-width: 90%; max-height: 90%; border-radius: 15px; border: 2px solid var(--neon-blue); box-shadow: 0 0 30px var(--neon-blue); }
 
-        .btn-back {
-            background: none; border: 1px solid #444; color: #fff;
+        .btn-back, .p-btn, .item-player {
+            background: var(--silver-grad) !important;
+            background-size: 200% auto !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            animation: titleShimmer 3s linear infinite !important;
+            border: 1px solid #444; color: #fff;
             padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;
             margin-top: auto; transition: 0.3s; flex-shrink: 0;
+            font-weight: bold; text-transform: uppercase;
         }
-        .btn-back:hover { background: #fff; color: #000; }
+
+        .p-btn { padding: 4px 10px; font-size: 0.7rem; margin: 0 2px; border-radius: 5px; }
 
         #music-player { 
             margin-top: 10px; padding: 10px; 
             background: rgba(0, 72, 255, 0.08); border: 1px solid var(--glass-border);
             border-radius: 12px; display: none; flex-shrink: 0;
         }
-        .p-btn { background: none; border: 1px solid #fff; color: #fff; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; margin: 0 2px; }
 
         /* ESTILO DO RODAPÉ ANIMADO */
         .footer-credits {
@@ -288,7 +294,7 @@
                 <div class="item" onclick="navigate(5)"><strong>PSTYLE ESTÁTICO</strong><span></span></div>
                 <div class="item" onclick="navigate(6)"><strong>PCBACK ESTÁTICO</strong><span></span></div>
             </div>
-            <div class="item" style="margin-top: 10px; aspect-ratio: auto; width: 100%; height: 30px;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
+            <div class="item item-player" style="margin-top: 10px; aspect-ratio: auto; width: 100%; height: 30px;" onclick="togglePlayer()"><strong>MUSIC PLAYER</strong></div>
             <div id="music-player">
                 <div class="song-marquee-container">
                     <div id="current-song">---</div>
@@ -426,7 +432,6 @@
             { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/cqqhzkv1ll1p09z7qgylp/Desireless-voyage-voyage.mp3.mp3?rlkey=hscvkehw7n7vvgi2im4rwhom7&st=2ldonj76&raw=1" }
         ];
 
-
     let currentTrack = 0; const audio = new Audio(); let volState = 2;
     function loadTrack(i) { currentTrack = i; audio.src = playlist[i].url; document.getElementById('current-song').innerText = playlist[i].name; }
     function enterGallery() { document.body.classList.add('loaded'); loadTrack(0); audio.play().catch(()=>{}); }
@@ -439,77 +444,15 @@
     function togglePlayer() { const p = document.getElementById('music-player'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
     function openZoom(el) { const img = el.querySelector('img'); if(img) { document.getElementById('zoomed-img').src = img.src; document.getElementById('zoom-overlay').style.display = 'flex'; } }
     function closeZoom() { document.getElementById('zoom-overlay').style.display = 'none'; document.getElementById('zoomed-img').src = ''; }
-</script>
-<div id="security-alert" style="
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--neon-blue);
-    padding: 20px 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(0, 72, 255, 0.4);
-    text-align: center;
-    pointer-events: none;
-">
-    <span style="
-        background: var(--silver-grad);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: bold;
-        letter-spacing: 2px;
-        font-size: 1rem;
-        display: block;
-    ">Copyright - Acesso Proibido</span>
-</div>
 
-<script>
     (function() {
-        const alertBox = document.getElementById('security-alert');
-        let isShowing = false;
-
-        function showAlert() {
-            if (isShowing) return;
-            isShowing = true;
-            alertBox.style.display = 'block';
-            
-            setTimeout(() => {
-                alertBox.style.display = 'none';
-                isShowing = false;
-            }, 2000);
-        }
-
-        document.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            showAlert();
-        });
-
-        document.addEventListener('keydown', e => {
-            if (
-                e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C') ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) ||
-                e.key === 'F12'
-            ) {
-                e.preventDefault();
-                showAlert();
-                return false;
-            }
-        });
-
         const style = document.createElement('style');
-        style.innerHTML = `
-            * {
-                -webkit-user-select: none !important;
-                -moz-user-select: none !important;
-                -ms-user-select: none !important;
-                user-select: none !important;
-            }
-        `;
+        style.innerHTML = `* { -webkit-user-select: none !important; user-select: none !important; }`;
         document.head.appendChild(style);
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c') || e.key === 'F12') e.preventDefault();
+        });
     })();
 </script>
 </body>
