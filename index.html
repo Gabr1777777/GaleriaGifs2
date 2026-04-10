@@ -94,7 +94,6 @@
             padding: 20px; text-align: center; display: flex; flex-direction: column;
         }
 
-        /* CABEÇALHO COM FOTO E TITULO */
         .header-main {
             display: flex;
             align-items: center;
@@ -169,7 +168,6 @@
 
         @keyframes marquee { 0% { transform: translate(100%, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* LETREIRO DO PLAYER */
         .song-marquee-container {
             width: 100%;
             overflow: hidden;
@@ -247,7 +245,6 @@
             border-radius: 12px; display: none; flex-shrink: 0;
         }
 
-        /* ESTILO DO RODAPÉ ANIMADO */
         .footer-credits {
             position: fixed;
             bottom: 10px;
@@ -267,6 +264,22 @@
             letter-spacing: 2px;
             text-transform: uppercase;
         }
+
+        /* ESTILO DO ALERTA DE COPYRIGHT */
+        .copy-alert {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(0, 5, 15, 0.95); border: 2px solid var(--neon-blue);
+            padding: 25px 40px; border-radius: 15px; z-index: 10000; text-align: center;
+            backdrop-filter: blur(15px); box-shadow: 0 0 30px rgba(0, 72, 255, 0.4);
+            pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .copy-alert.show { opacity: 1; }
+        .copy-alert h3 {
+            margin: 0; font-size: 1rem; background: var(--silver-grad);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: titleShimmer 3s linear infinite; font-weight: 900; letter-spacing: 2px;
+        }
+        .copy-alert p { font-size: 0.6rem; color: #aaa; margin: 10px 0 0 0; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -274,6 +287,11 @@
 <div class="bg-glow"></div>
 <div id="zoom-overlay" onclick="closeZoom()"><img id="zoomed-img" src=""></div>
 <div id="splash-screen"><button class="btn-enter" onclick="enterGallery()">Entrar</button></div>
+
+<div id="copyright-alert" class="copy-alert">
+    <h3>COPYRIGHT - ACESSO PROIBIDO</h3>
+    <p>Propriedade de Gabr (1777777)</p>
+</div>
 
 <div class="wrapper" id="main-wrapper">
     <div class="page">
@@ -445,13 +463,33 @@
     function openZoom(el) { const img = el.querySelector('img'); if(img) { document.getElementById('zoomed-img').src = img.src; document.getElementById('zoom-overlay').style.display = 'flex'; } }
     function closeZoom() { document.getElementById('zoom-overlay').style.display = 'none'; document.getElementById('zoomed-img').src = ''; }
 
+    // FUNÇÃO PARA EXIBIR ALERTA DE SEGURANÇA
+    function showCopyright() {
+        const alert = document.getElementById('copyright-alert');
+        alert.classList.add('show');
+        setTimeout(() => alert.classList.remove('show'), 2000);
+    }
+
     (function() {
         const style = document.createElement('style');
         style.innerHTML = `* { -webkit-user-select: none !important; user-select: none !important; }`;
         document.head.appendChild(style);
-        document.addEventListener('contextmenu', e => e.preventDefault());
+        
+        // BLOQUEIO E ALERTA NO BOTÃO DIREITO
+        document.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            showCopyright();
+        });
+
+        // BLOQUEIO E ALERTA EM ATALHOS DE TECLADO
         document.addEventListener('keydown', e => {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c') || e.key === 'F12') e.preventDefault();
+            if (
+                (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c')) || 
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+                showCopyright();
+            }
         });
     })();
 </script>
