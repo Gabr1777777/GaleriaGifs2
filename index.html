@@ -1,41 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Xatspace - Galeria Oficial</title>
+    <style>
+        :root {
+            --main-color: #00d9ff;
+            --bg-dark: #02050a;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: var(--bg-dark); color: white;
+            font-family: 'Segoe UI', sans-serif; overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+            transition: 0.5s;
+            /* Proteção contra seleção de texto */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        #stars-bg { position: fixed; width: 100%; height: 100%; z-index: 1; background: radial-gradient(circle at center, #020a1a, #000); }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0; } 50% { opacity: 1; box-shadow: 0 0 10px white; } }
+
+        .main-card {
+            position: relative; z-index: 10;
+            text-align: center; background: rgba(255, 255, 255, 0.05);
+            padding: 40px; border-radius: 25px;
+            border: 2px solid var(--main-color);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+            backdrop-filter: blur(12px);
+            width: 380px;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 15px; text-shadow: 0 0 15px var(--main-color); letter-spacing: 2px; text-transform: uppercase; }
+
+        .counter-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .label-visitas {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: var(--main-color);
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+
+        .visitor-counter {
+            font-family: 'Courier New', monospace; font-size: 1.5rem; color: #fff;
+            letter-spacing: 5px; background: #000;
+            display: inline-block; padding: 10px 20px; border-radius: 5px; 
+            border: 2px solid var(--main-color);
+            box-shadow: inset 0 0 15px var(--main-color);
+            min-width: 160px;
+        }
+
+        .btn-main {
+            display: block; width: 100%; padding: 18px;
+            background: var(--main-color); border: none;
+            color: #000; font-size: 1.1rem; font-weight: bold;
+            border-radius: 12px; text-transform: uppercase;
+            transition: 0.3s; cursor: pointer;
+            box-shadow: 0 0 15px var(--main-color);
+        }
+
+        .lista-links {
+            display: none; margin-top: 20px; padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .btn-link {
+            display: block; width: 100%; padding: 12px; margin: 8px 0;
+            background: transparent; border: 1px solid white;
+            color: white; text-decoration: none; font-size: 0.9rem;
+            border-radius: 8px; transition: 0.2s; cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-link:hover { border-color: var(--main-color); color: var(--main-color); background: rgba(255,255,255,0.05); }
+
+        .btn-color {
+            margin-top: 25px; padding: 8px 15px;
+            background: transparent; border: 1px solid var(--main-color);
+            color: var(--main-color); border-radius: 5px;
+            cursor: pointer; font-size: 0.8rem; text-transform: uppercase;
+            transition: 0.3s; font-weight: bold;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        #viewer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; background: black; }
+        iframe { width: 100%; height: 100%; border: none; }
+        .back-btn { position: fixed; top: 20px; left: 20px; z-index: 110; padding: 10px 25px; background: var(--main-color); color: #000; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; }
+
+        /* Alerta de Proteção no Meio da Tela */
+        #copyright-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            background: rgba(2, 5, 10, 0.95);
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+            padding: 25px 50px;
+            border-radius: 15px;
+            font-weight: bold;
+            box-shadow: 0 0 40px var(--main-color);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body oncontextmenu="return showCopyright(event)">
+
+<div id="stars-bg"></div>
+
+<div id="copyright-alert">Copyright - Acesso Proibido</div>
+
+<div class="main-card">
+    <h1>Xatspace</h1>
+    
+    <div class="counter-container">
+        <span class="label-visitas">Visitas:</span>
+        <div class="visitor-counter" id="display-count">000000</div>
+    </div>
+
+    <button class="btn-main" onclick="abrirLista()">Galeria de Xatspace</button>
+
+    <div id="listaLinks" class="lista-links">
+        <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/PerfilRosa/')">Xatspace - Perfil 1 - 2000 XATS</button>
+        <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/PerfilAzul/')">Xatspace - Perfil 2 PASS:1009 - 2500 XATS</button>
+        <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/PerfilRosa2/')">Xatspace - Perfil 3 - 2000 XATS</button>
+         <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/PerfilCinza/')">Xatspace - Perfil 4 - 200 XATS</button>
+        <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/PerfilVermelho/')">Xatspace - Perfil 5 (Married) - 2000 XATS</button>
+       <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/PerfilAmarelo/')">Xatspace - Perfil 6 - 1500 XATS</button>
+        <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/PerfilVerde/')">Xatspace - Perfil 7 - 2000 XATS</button>
+        <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/GaleriaGifs/')">Xatspace - Galeria de GIFs - 3500 XATS</button>
+        <button class="btn-link" onclick="abrir('https://gabr1777777.github.io/GaleriaGifs2/')">Xatspace - Galeria de GIFs 2 - 3500 XATS</button>
+    </div>
+    
+    <button class="btn-color" onclick="nextColor()">COR</button>
+</div>
+
+<div id="viewer">
+    <button class="back-btn" onclick="fechar()">← Voltar</button>
+    <iframe id="frame"></iframe>
+</div>
+
 <script>
-    const playlist = [
-            { name: "Eminem - You dont know", url: "https://www.dropbox.com/scl/fi/4y0lc0fi24e9yavn17psv/Eminem-you-dont-know.mp3.mp3?rlkey=zicb6spgqe3pv0gqnz3xc24zo&st=wy1w0icm&raw=1" },
-            { name: "The Sound of Silence – Rising to the Night", url: "https://www.dropbox.com/scl/fi/2y9zhx5zjsdxg3zljc2f9/sound-of-silence.mp3.mp3?rlkey=88zg0td3loy40uxmcm9rnk1jt&st=qty8093e&raw=1" },
-            { name: "Desireless - Voyage Voyage", url: "https://www.dropbox.com/scl/fi/cqqhzkv1ll1p09z7qgylp/Desireless-voyage-voyage.mp3.mp3?rlkey=hscvkehw7n7vvgi2im4rwhom7&st=2ldonj76&raw=1" }
-        ];
+    // --- SISTEMA DE PROTEÇÃO ---
+    function showCopyright(e) {
+        if (e) e.preventDefault();
+        const alertBox = document.getElementById('copyright-alert');
+        alertBox.style.display = 'block';
+        setTimeout(() => {
+            alertBox.style.display = 'none';
+        }, 2000);
+        return false;
+    }
 
-    let currentTrack = 0; const audio = new Audio(); let volState = 2;
-    function loadTrack(i) { currentTrack = i; audio.src = playlist[i].url; document.getElementById('current-song').innerText = playlist[i].name; }
-    function enterGallery() { document.body.classList.add('loaded'); loadTrack(0); audio.play().catch(()=>{}); }
-    audio.onended = function() { nextSong(); };
-    function nextSong() { currentTrack = (currentTrack + 1) % playlist.length; loadTrack(currentTrack); audio.play(); }
-    function prevSong() { currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; loadTrack(currentTrack); audio.play(); }
-    function playPause() { const b = document.getElementById('play-btn'); if (audio.paused) { audio.play(); b.innerText = "Pause"; } else { audio.pause(); b.innerText = "Play"; } }
-    function toggleVolume() { const b = document.getElementById('vol-btn'); volState = (volState + 1) % 3; if (volState === 0) { audio.volume = 0; b.innerText = "Mudo"; } else if (volState === 1) { audio.volume = 0.5; b.innerText = "Vol: 50%"; } else { audio.volume = 1.0; b.innerText = "Vol: 100%"; } }
-    function navigate(i) { document.getElementById('main-wrapper').style.transform = `translateX(-${i * 100}vw)`; }
-    function togglePlayer() { const p = document.getElementById('music-player'); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
-    function openZoom(el) { const img = el.querySelector('img'); if(img) { document.getElementById('zoomed-img').src = img.src; document.getElementById('zoom-overlay').style.display = 'flex'; } }
-    function closeZoom() { document.getElementById('zoom-overlay').style.display = 'none'; document.getElementById('zoomed-img').src = ''; }
+    document.addEventListener('keydown', function(e) {
+        // Bloqueia Ctrl+U e outras teclas de inspeção
+        if ((e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73 || e.keyCode === 83 || e.keyCode === 67)) || e.keyCode === 123) {
+            showCopyright(e);
+        }
+    });
 
-    /* BLOQUEIO E ALERTA DE COPYRIGHT */
-    (function() {
-        const style = document.createElement('style');
-        style.innerHTML = `* { -webkit-user-select: none !important; user-select: none !important; }`;
-        document.head.appendChild(style);
+    // --- ESTRELAS ---
+    const bg = document.getElementById('stars-bg');
+    for(let i=0; i<100; i++) {
+        let s = document.createElement('div');
+        s.className = 'star';
+        s.style.left = Math.random() * 100 + 'vw';
+        s.style.top = Math.random() * 100 + 'vh';
+        s.style.width = s.style.height = Math.random() * 2 + 'px';
+        s.style.animationDelay = Math.random() * 5 + 's';
+        bg.appendChild(s);
+    }
 
-        const copyrightMsg = "© Propriedade de Gabr (1777777). Acesso ao código protegido!";
+    // --- CONTADOR ---
+    const ID_VISITAS = "galeria_xat_new_start_2026"; 
+    async function carregarContadores() {
+        const displayPrincipal = document.getElementById('display-count');
+        try {
+            const resV = await fetch(`https://api.counterapi.dev/v1/xatspace-galeria/${ID_VISITAS}/up`);
+            const dataV = await resV.json();
+            const valor = (dataV.count || dataV.value).toString();
+            displayPrincipal.innerText = valor.padStart(6, '0');
+        } catch(e) {
+            displayPrincipal.innerText = "000001";
+        }
+    }
+    window.addEventListener('load', carregarContadores);
 
-        document.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            alert(copyrightMsg);
-        });
+    // --- CORES E NAVEGAÇÃO ---
+    const cores = ['#00d9ff', '#ff007f', '#00ff00', '#ffff00', '#ff4500', '#9400d3', '#ffffff', '#ff0000', '#0000ff', '#00ced1'];
+    let corAtual = 0;
 
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'i') || e.key === 'F12') {
-                e.preventDefault();
-                alert(copyrightMsg);
-            }
-        });
-    })();
+    function nextColor() {
+        corAtual = (corAtual + 1) % cores.length;
+        document.documentElement.style.setProperty('--main-color', cores[corAtual]);
+    }
+
+    function abrirLista() {
+        const lista = document.getElementById('listaLinks');
+        lista.style.display = (lista.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function abrir(url) {
+        const frame = document.getElementById('frame');
+        const viewer = document.getElementById('viewer');
+        frame.src = "about:blank"; 
+        setTimeout(() => {
+            frame.src = url + "?v=" + Date.now();
+            viewer.style.display = 'block';
+        }, 50);
+    }
+
+    function fechar() {
+        document.getElementById('viewer').style.display = 'none';
+        document.getElementById('frame').src = '';
+    }
 </script>
+
+</body>
+</html>
